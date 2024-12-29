@@ -1,0 +1,36 @@
+.navbar-container {
+    width: 100%;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px #e7c624;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+  
+  .navbar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+  
+  .navbar-list {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+  }
+  
+  .navbar-list li {
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .menu-button, .login-button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+  }
