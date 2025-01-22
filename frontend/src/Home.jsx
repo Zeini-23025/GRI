@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"; 
 import "./Home.css"; 
+import Navbar from "./Navbar";
 import Footer from "./Footer"; 
 
 function Home() {
@@ -28,6 +29,7 @@ function Home() {
     
     <div className="container">
       {/* Header */}
+      <Navbar/>
       <div className="home-container">
       <div className="video-background">
         <video autoPlay loop muted>

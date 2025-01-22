@@ -1,24 +1,42 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import *
+from .models import *   
 
 class UserSerializer(serializers.ModelSerializer):
+    """
+    Sérialiseur pour le modèle Utilisateurs.
+    """
     class Meta:
-        model = User
-        fields = ('id', 'nom', 'prenom', 'email', 'telephone', 'role', 'password')
-        extra_kwargs = {"password": {'write_only':True} }
+        model = Utilisateurs
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'password', 'telephone', 'role')
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'email': {'required': True},
+        }
 
     def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        user.save()
+        user = Utilisateurs.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password'],
+            first_name=validated_data.get('first_name', ''),
+            last_name=validated_data.get('last_name', ''),
+            telephone=validated_data.get('telephone', ''),
+            role=validated_data.get('role', 'client'),
+        )
         return user
 
     def update(self, instance, validated_data):
         instance.username = validated_data.get('username', instance.username)
         instance.email = validated_data.get('email', instance.email)
+        instance.first_name = validated_data.get('first_name', instance.first_name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.telephone = validated_data.get('telephone', instance.telephone)
+        instance.role = validated_data.get('role', instance.role)
+        if 'password' in validated_data:
+            instance.set_password(validated_data['password'])
         instance.save()
         return instance
-    
+
 
 class TypesSerializer(serializers.ModelField):
     class Meta:
