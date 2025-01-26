@@ -1,0 +1,142 @@
+/* Style de base pour le footer */
+footer {
+  background-color: #1d2636;
+  padding: 50px 0;
+  color: #fff;
+  position: relative; /* Pour assurer la bonne position du contenu dans certaines situations */
+}
+
+footer .container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap; /* Permet de faire un retour à la ligne si nécessaire */
+  
+}
+
+footer h3 {
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer ul li {
+  margin-bottom: 10px;
+}
+
+footer ul li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+footer ul li a:hover {
+  color: #766525; /* Couleur d'accent */
+}
+
+/* Mentions légales */
+.legal {
+  text-align: center;
+  padding: 20px;
+  background: #1d2636;
+  color: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 800px) {
+  footer .container {
+    flex-direction: column;
+    text-align: center; /* Centrer le texte et les éléments pour les petits écrans */
+  }
+
+  footer h3 {
+    font-size: 22px; /* Réduction de la taille du titre sur petits écrans */
+  }
+}
+
+.footerContact {
+  background-color: #766525;
+  padding: 20px 0;
+  color: #fff;
+  text-align: center; /* Centrer le contenu du footerContact */
+}
+
+.footerContact h1 {
+  font-size: 30px;
+  margin-bottom: 10px; /* Ajout d'un peu de marge sous le titre */
+}
+
+/* Pour les très petits écrans */
+@media screen and (max-width: 480px) {
+  .footerContact h1 {
+    font-size: 24px; /* Réduction de la taille du titre sur petits écrans */
+  }
+
+  .btn5 {
+    font-size: 16px; /* Taille réduite du texte du bouton */
+    padding: 12px 20px; /* Réduction de la taille du bouton */
+  }
+
+  .footerContact {
+    padding: 20px 15px; /* Réduction du padding pour les très petits écrans */
+  }
+}
+
+/* Bouton Contactez-nous */
+.btn5 {
+  background-color: #1d2636; /* Couleur de fond */
+  color: #fff; /* Couleur du texte */
+  font-size: 18px; /* Taille standard du texte */
+  padding: 16px 20px; /* Taille du bouton */
+  border: none; /* Pas de bordure */
+  border-radius: 10px; /* Coins arrondis */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Transition pour l'effet hover */
+}
+
+.btn5:hover {
+  transform: scale(1.05); /* Effet d'agrandissement léger */
+  color: #e5e5e5; /* Légère modification de la couleur du texte */
+}
+
+.send {
+  display: flex;
+  flex-direction: column; /* Mettre les éléments en colonne */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 15px; /* Espacement entre le texte et le bouton */
+  padding: 20px 0;
+}
+
+.send .text {
+  max-width: 600px; /* Limite la largeur du texte pour une meilleure lisibilité */
+}
+
+.send .btn5 {
+  margin-top: 20px; /* Ajouter un espacement au-dessus du bouton */
+  font-size: 18px; /* Taille standard du texte */
+  padding: 12px 25px;
+  border-radius: 8px;
+}
+
+/* Responsive pour mobile */
+@media screen and (max-width: 480px) {
+  .send .text h1 {
+    font-size: 20px; /* Réduire la taille du titre pour les petits écrans */
+  }
+
+  .send .text p {
+    font-size: 14px; /* Ajuster la taille du texte */
+  }
+
+  .send .btn5 {
+    font-size: 16px; /* Taille réduite pour le bouton sur les petits écrans */
+    padding: 12px 20px; /* Bouton un peu plus petit */
+  }
+}

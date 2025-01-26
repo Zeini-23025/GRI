@@ -1,0 +1,125 @@
+/* Section RecentCard */
+.recent .text {
+    padding: 30px;
+  }
+  
+  .recent .category span {
+    padding: 4px 15px;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 13px;
+    display: inline-block;
+  }
+  
+  .recent .category i {
+    font-size: 20px;
+    color: #bec7d8;
+  }
+  
+  .recent p {
+    color: #72809d;
+  }
+  
+  .recent .button {
+    border-top: 1px solid #e4e8f3;
+    padding: 10px 30px;
+  }
+  
+  /* Animation sur survol */
+  .recent .box {
+    transition: transform 0.3s ease; /* Transition de l'agrandissement */
+    border-radius: 20px;
+  }
+  
+  .recent .box:hover {
+    transform: scale(1.05); /* Agrandissement au survol */
+    cursor: pointer; /* Changer le curseur au survol */
+  }
+  
+  /* Responsive Design pour les écrans de moins de 1024px */
+  @media screen and (max-width: 1024px) {
+    .content {
+      grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne */
+      gap: 20px;
+    }
+  
+    .recent .text {
+      padding: 20px;
+    }
+  
+    .recent .category span {
+      font-size: 12px;
+    }
+  
+    .recent h4 {
+      font-size: 18px; /* Ajuster la taille du texte */
+    }
+  
+    .recent p {
+      font-size: 14px; /* Ajuster la taille du texte */
+    }
+  
+    .recent .button {
+      padding: 8px 20px;
+    }
+  }
+  
+  /* Responsive Design pour les écrans de moins de 768px (tablettes et mobiles) */
+  @media screen and (max-width: 768px) {
+    .content {
+      grid-template-columns: repeat(1, 1fr); /* 1 carte par ligne */
+      gap: 20px;
+    }
+  
+    .recent .text {
+      padding: 15px;
+    }
+  
+    .recent .category span {
+      font-size: 12px;
+    }
+  
+    .recent h4 {
+      font-size: 16px; /* Réduire la taille du titre */
+    }
+  
+    .recent p {
+      font-size: 13px; /* Réduire la taille du texte */
+    }
+  
+    .recent .button {
+      padding: 8px 15px;
+    }
+  
+    .recent .button label {
+      font-size: 12px; /* Réduire la taille de l'étiquette */
+    }
+  }
+  
+  /* Responsive pour les petits écrans (mobiles) */
+  @media screen and (max-width: 480px) {
+    .recent .text {
+      padding: 10px;
+    }
+  
+    .recent .category span {
+      font-size: 11px;
+    }
+  
+    .recent h4 {
+      font-size: 14px; /* Encore plus petit sur les très petits écrans */
+    }
+  
+    .recent p {
+      font-size: 12px;
+    }
+  
+    .recent .button {
+      padding: 6px 15px;
+    }
+  
+    .recent .button label {
+      font-size: 10px; /* Réduire encore plus pour petits écrans */
+    }
+  }
+  

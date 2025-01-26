@@ -1,0 +1,44 @@
+.contact form div {
+    display: flex;
+  }
+  .contact textarea {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  .contact input {
+    margin-bottom: 20px;
+    margin-right: 10px;
+  }
+  .contact form {
+    padding: 30px;
+  }
+  @media screen and (max-width: 768px) {
+    .contact h4 {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    .contact form div {
+      flex-direction: column;
+    }
+    .contact input {
+      width: 100%;
+    }
+  }
+  
+  .btn6 {
+    background-color: #1d2636; /* Couleur de fond */
+    color: #fff; /* Couleur du texte */
+    font-size: 14px; /* Réduction de la taille du texte */
+    padding: 16px 20px; /* Taille réduite du bouton */
+    border: none; /* Pas de bordure */
+    border-radius: 10px; /* Coins arrondis */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transition pour l'effet hover */
+  }
+  
+  .btn6:hover {
+    transform: scale(1.05); /* Effet d'agrandissement léger */
+    color: #e5e5e5; /* Légère modification de la couleur du texte */
+  }

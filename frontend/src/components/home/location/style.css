@@ -1,0 +1,108 @@
+/* Styles de base pour la section Location */
+.location .box {
+  position: relative;
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.location .box:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.location img {
+  border-radius: 15px;
+  width: 100%; /* Assurez-vous que l'image s'adapte bien à la largeur de la box */
+  height: 100%; /* La hauteur de l'image s'adapte à la taille de la box */
+  object-fit: cover; /* Assure que l'image garde ses proportions et est recadrée si nécessaire */
+}
+
+.location .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 250px;
+  width: 100%;
+  color: #fff;
+  z-index: 222;
+  padding: 10px;
+}
+
+.location h5 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.location label {
+  color: #fff;
+  margin-right: 10px;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.location .content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Par défaut, 3 éléments par ligne */
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.location .content .box {
+  margin-bottom: 30px; /* Ajout de marge entre les éléments */
+}
+
+/* Responsive pour les écrans de moins de 800px (tablettes) */
+@media screen and (max-width: 800px) {
+  .location .content {
+    grid-template-columns: repeat(2, 1fr); /* 2 éléments par ligne */
+  }
+
+  .location .overlay {
+    height: 200px; /* Moins d'espace sur l'overlay pour les petits écrans */
+  }
+
+  .location h5 {
+    font-size: 16px;
+  }
+
+  .location label {
+    font-size: 12px;
+  }
+}
+
+/* Responsive pour les écrans de moins de 480px (mobiles) */
+@media screen and (max-width: 480px) {
+  .location .content {
+    grid-template-columns: 1fr; /* 1 élément par ligne */
+  }
+
+  .location .overlay {
+    height: 150px; /* Encore moins d'espace pour l'overlay sur mobile */
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 10px;
+  }
+
+  .location h5 {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .location label {
+    font-size: 12px;
+    margin-right: 5px;
+  }
+
+  .location .box {
+    padding: 15px; /* Réduction du padding pour les petits écrans */
+  }
+}
