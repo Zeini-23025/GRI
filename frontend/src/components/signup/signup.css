@@ -1,0 +1,21 @@
+.custom-signup-btn {
+    background-color: #1d2636; /* Couleur personnalisée */
+    color: white; /* Texte en blanc */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Animation fluide */
+  }
+  
+  .custom-signup-btn:hover {
+    background-color: #766525; /* Couleur plus sombre au survol */
+    color: #141a25;
+  }
+
+  
+  
+  .card {
+    margin-bottom: 50px; /* Ajoute un espacement en bas du formulaire */
+  }
+  

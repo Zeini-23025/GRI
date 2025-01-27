@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import api from '../../api';
+=======
+import axios from 'axios';
+import "./signup.css";
+>>>>>>> 8f224708e4a866f1869e133e84513e23749ce86a
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
@@ -32,13 +37,16 @@ const Signup = () => {
     }
   };
 
+  const handleSignupClick = () => {
+    navigate('/login'); // Rediriger vers la page d'inscription
+  };
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <div className="card">
+          <div className="card shadow-lg">
             <div className="card-body">
-              <h2 className="text-center">Signup</h2>
+              <h2 className="text-center">Inscription</h2>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="username" className="form-label">
@@ -70,7 +78,7 @@ const Signup = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">
-                    Password:
+                    Mot de passe :
                   </label>
                   <input
                     type="password"
@@ -84,7 +92,7 @@ const Signup = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="first_name" className="form-label">
-                    First Name:
+                    Nom:
                   </label>
                   <input
                     type="text"
@@ -97,7 +105,7 @@ const Signup = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="last_name" className="form-label">
-                    Last Name:
+                    Prenom :
                   </label>
                   <input
                     type="text"
@@ -121,7 +129,7 @@ const Signup = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="mb-3">
+                {/* <div className="mb-3">
                   <label htmlFor="role" className="form-label">
                     Role:
                   </label>
@@ -135,14 +143,24 @@ const Signup = () => {
                     <option value="client">Client</option>
                     <option value="provider">Provider</option>
                   </select>
-                </div>
+                </div> */}
                 {error && <p className="text-danger">{error}</p>}
                 <div className="text-center">
-                  <button type="submit" className="btn btn-primary">
-                    Signup
-                  </button>
+                <button type="submit" className="btn custom-signup-btn">
+                  S'inscrire
+                </button>
                 </div>
               </form>
+              <p className="text-center">
+              Avez vous déja un compte ?{' '}
+              <button
+                type="button"
+                className="btn btn-link"
+                onClick={handleSignupClick}
+              >
+                Se connecter
+              </button>
+            </p>
             </div>
           </div>
         </div>
