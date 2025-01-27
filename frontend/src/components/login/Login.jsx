@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../../api';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -14,8 +14,8 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8000/api/login/', {
-        email,
+      const response = await api.post('/api/token/', {
+        username,
         password,
       });
       localStorage.setItem('access_token', response.data.access);
@@ -39,15 +39,15 @@ const Login = () => {
             <h2 className="text-center mb-4">Login</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="email" className="form-label">
-                  Email:
+                <label htmlFor="username" className="form-label">
+                  Username:
                 </label>
                 <input
-                  type="email"
-                  id="email"
+                  type="text"
+                  id="username"
                   className="form-control form-control-lg"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   required
                 />
               </div>
