@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './login.css'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -36,7 +37,7 @@ const Login = () => {
       <div className="col-md-6 col-lg-4">
         <div className="card shadow-lg">
           <div className="card-body p-4">
-            <h2 className="text-center mb-4">Login</h2>
+            <h2 className="text-center mb-4">Connexion</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
@@ -53,7 +54,7 @@ const Login = () => {
               </div>
               <div className="mb-3">
                 <label htmlFor="password" className="form-label">
-                  Password:
+                  Mot de passe :
                 </label>
                 <input
                   type="password"
@@ -66,9 +67,9 @@ const Login = () => {
               </div>
               {error && <p className="text-danger text-center">{error}</p>}
               <div className="d-grid">
-                <button type="submit" className="btn btn-primary btn-lg mb-3">
-                  Login
-                </button>
+              <button type="submit" className="btn custom-signup-btn">
+                Se connecter
+              </button>
               </div>
             </form>
             <p className="text-center">

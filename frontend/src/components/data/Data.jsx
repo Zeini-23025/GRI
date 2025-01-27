@@ -45,7 +45,7 @@ export const nav = [
     },
     {
       cover: "../images/hero/h3.png",
-      name: "Apartement",
+      name: "Apartements",
       total: "300 Property",
     },
     // {
