@@ -7,17 +7,25 @@ header {
   top: 0;
   z-index: 99999;
 }
+
 header img {
   width: 170px;
 }
+
+/* Modification pour les liens */
 header a {
   margin-left: 30px;
   transition: 0.5s;
-  font-weight: 500;
+  font-weight: 600;
+  color: #1d2636; /* Couleur blanche comme le bouton */
+  text-decoration: none; /* Suppression du soulignement */
 }
+
+/* Effet hover pour les liens */
 header a:hover {
-  color: #766525;
+  color: #766525; /* Légère modification au survol */
 }
+
 header span {
   width: auto;
   padding: 0px 6px;
@@ -27,30 +35,39 @@ header span {
   margin-right: 4px;
   font-weight: 400;
 }
+
 header h4 {
   font-weight: 500;
   margin-right: 20px;
 }
+
 header .toggle {
   display: none;
 }
+
+/* Responsiveness */
 @media screen and (max-width: 768px) {
   header {
     padding: 0;
   }
+
   header img {
     margin-top: 30px;
   }
+
   header .button {
     display: none;
   }
+
   header .nav .flex {
     display: none;
   }
+
   header .toggle {
     display: block;
     margin-top: 20px;
   }
+
   header .small {
     position: absolute;
     top: 10vh;
@@ -59,19 +76,22 @@ header .toggle {
     background-color: #766525;
     padding: 20px;
   }
+
   header li a {
     display: inline-block;
     margin-bottom: 20px;
     color: #fff;
   }
 }
+
+/* Bouton "Se connecter" */
 .btn1 {
   background-color: #1d2636; /* Couleur de fond */
   color: #fff; /* Couleur du texte */
-  font-size: 14px; /* Réduction de la taille du texte */
-  padding: 16px 20px; /* Taille réduite du bouton */
+  font-size: 12px; /* Réduction de la taille du texte */
+  padding: 12px 16px; /* Taille réduite du bouton */
   border: none; /* Pas de bordure */
-  border-radius: 10px; /* Coins arrondis */
+  border-radius: 15px; /* Coins arrondis */
   cursor: pointer;
   transition: all 0.3s ease; /* Transition pour l'effet hover */
 }

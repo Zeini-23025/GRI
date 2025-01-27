@@ -16,6 +16,14 @@ export const nav = [
       path: "/blog",
     },
     // {
+    //   text: "Login",
+    //   path: "/login",
+    // },
+    // {
+    //   text: "Signup",
+    //   path: "/signup",
+    // },
+    // {
     //   text: "Pricing",
     //   path: "/pricing",
     // },
@@ -169,7 +177,7 @@ export const nav = [
       Villas: "12 Villas",
       Apartments: " 10 Apartments",
       Boutiques: "07 Offices",
-      cover: "./images/location/capitale.jpg",
+      cover: "./images/location/plus.jpg",
     },
     {
       id: 6,
