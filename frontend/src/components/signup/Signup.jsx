@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import api from '../../api';
-=======
-import axios from 'axios';
 import "./signup.css";
->>>>>>> 8f224708e4a866f1869e133e84513e23749ce86a
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
