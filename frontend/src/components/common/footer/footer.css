@@ -89,19 +89,21 @@ footer ul li a:hover {
 
 /* Bouton Contactez-nous */
 .btn5 {
-  background-color: #1d2636; /* Couleur de fond */
-  color: #fff; /* Couleur du texte */
-  font-size: 18px; /* Taille standard du texte */
-  padding: 16px 20px; /* Taille du bouton */
-  border: none; /* Pas de bordure */
-  border-radius: 10px; /* Coins arrondis */
+  background-color: #1d2636;
+  color: #fff;
+  font-size: 14px; /* Taille réduite du texte */
+  padding: 12px 25px; /* Réduction du padding horizontal */
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s ease; /* Transition pour l'effet hover */
+  transition: all 0.3s ease;
+  width: auto; /* Au lieu de 100% */
+  display: inline-block; /* Pour que le bouton prenne la largeur de son contenu */
 }
 
 .btn5:hover {
-  transform: scale(1.05); /* Effet d'agrandissement léger */
-  color: #e5e5e5; /* Légère modification de la couleur du texte */
+  transform: scale(1.05);
+  color: #e5e5e5;
 }
 
 .send {

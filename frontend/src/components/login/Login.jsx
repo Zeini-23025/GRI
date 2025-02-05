@@ -21,7 +21,7 @@ const Login = () => {
       });
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
-      alert('Login successful!');
+      // alert('Login successful!');
       navigate('/'); // Rediriger après connexion
     } catch (err) {
       setError('Invalid email or password');
@@ -30,7 +30,12 @@ const Login = () => {
 
   const handleSignupClick = () => {
     navigate('/signup'); // Rediriger vers la page d'inscription
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant' // Changement immédiat sans animation
+    });
   };
+
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">

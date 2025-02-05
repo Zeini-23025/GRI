@@ -1,0 +1,160 @@
+.rent-form-container {
+  position: relative;
+  padding-top: 40px;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.rent-form-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #555;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #766525;
+  box-shadow: 0 0 5px rgba(118, 101, 37, 0.2);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group input[type="date"] {
+  color: #555;
+}
+
+.form-group input[type="number"] {
+  width: 150px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 15px;
+  background-color: #1d2636;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #5a4e1d;
+}
+
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Style pour les messages d'erreur */
+.error-message {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Style pour les champs requis */
+.required::after {
+  content: "*";
+  color: #dc3545;
+  margin-left: 4px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .rent-form-container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .form-group input[type="number"] {
+    width: 100%;
+  }
+}
+
+/* Animation lors de la soumission */
+.submit-button.loading {
+  position: relative;
+  color: transparent;
+}
+
+.submit-button.loading::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  margin: -10px 0 0 -10px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Style pour le message de succès */
+.success-message {
+  text-align: center;
+  color: #28a745;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  border: 1px solid #28a745;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  z-index: 10;
+}
+
+.back-button img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+} 

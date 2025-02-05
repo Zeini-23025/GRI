@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import api from '../../api';
-=======
-import axios from 'axios';
 import "./signup.css";
->>>>>>> 8f224708e4a866f1869e133e84513e23749ce86a
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -30,15 +27,26 @@ const Signup = () => {
 
     try {
       await api.post('/api/signup/', formData);
-      alert('Signup successful! Please login.');
-      navigate('/login'); // Rediriger vers la page de login
+      Swal.fire({
+        icon: 'success',
+        title: 'Inscription réussie!',
+        text: 'Vous allez être redirigé vers la page de connexion',
+        timer: 2000,
+        showConfirmButton: false
+      }).then(() => {
+        navigate('/login');
+      });
     } catch (err) {
-      setError('Error during signup. Please try again.');
+      setError('Erreur lors de l\'inscription. Veuillez réessayer.');
     }
   };
 
   const handleSignupClick = () => {
     navigate('/login'); // Rediriger vers la page d'inscription
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant' // Changement immédiat sans animation
+    });
   };
   return (
     <div className="container mt-5">

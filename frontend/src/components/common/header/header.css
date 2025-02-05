@@ -100,3 +100,47 @@ header .toggle {
   transform: scale(1.05); /* Effet d'agrandissement léger */
   color: #e5e5e5; /* Légère modification de la couleur du texte */
 }
+
+.btn-logout {
+  background-color: #1d2636; /* Couleur de fond */
+  color: #fff; /* Couleur du texte */
+  font-size: 12px; /* Réduction de la taille du texte */
+  padding: 12px 16px; /* Taille réduite du bouton */
+  border: none; /* Pas de bordure */
+  border-radius: 15px; /* Coins arrondis */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Transition pour l'effet hover */
+}
+
+.btn-logout:hover {
+  transform: scale(1.05); /* Effet d'agrandissement léger */
+  color: #e5e5e5; /* Légère modification de la couleur du texte */
+}
+
+.logout-icon {
+  width: 24px;  /* Ajustez selon la taille souhaitée */
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.logout-icon:hover {
+  transform: scale(1.1);
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.logo img {
+  height: 60px; /* Ajustez la hauteur selon vos besoins */
+  width: auto;
+  object-fit: contain;
+}
+
+/* Pour les écrans mobiles */
+@media screen and (max-width: 768px) {
+  .logo img {
+    height: 40px; /* Légèrement plus petit sur mobile */
+  }
+}

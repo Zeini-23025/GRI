@@ -13,6 +13,7 @@
   }
   .contact form {
     padding: 30px;
+    text-align: center; /* Centre le contenu du formulaire */
   }
   @media screen and (max-width: 768px) {
     .contact h4 {
@@ -31,11 +32,14 @@
     background-color: #1d2636; /* Couleur de fond */
     color: #fff; /* Couleur du texte */
     font-size: 14px; /* Réduction de la taille du texte */
-    padding: 16px 20px; /* Taille réduite du bouton */
+    padding: 12px 25px; /* Réduction du padding horizontal */
     border: none; /* Pas de bordure */
     border-radius: 10px; /* Coins arrondis */
     cursor: pointer;
     transition: all 0.3s ease; /* Transition pour l'effet hover */
+    width: auto; /* Au lieu de 100% */
+    display: inline-block; /* Pour que le bouton prenne la largeur de son contenu */
+    margin: 0 auto; /* Centre le bouton horizontalement */
   }
   
   .btn6:hover {
