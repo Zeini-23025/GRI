@@ -15,6 +15,7 @@ import HousesList from "../properties/HousesList";
 import ApartmentsList from "../properties/ApartmentsList";
 import ShopsList from "../properties/ShopsList";
 import RentForm from "../rent/RentForm";
+import FilteredProperties from "../home/featured/FilteredProperties";
 
 const Pages = () => {
   return (
@@ -26,6 +27,7 @@ const Pages = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/properties/:typeName" element={<FilteredProperties />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/contact" element={<Contact />} />

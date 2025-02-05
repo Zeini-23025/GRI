@@ -35,7 +35,7 @@ const FeaturedCard = () => {
     }
     window.scrollTo({
       top: 0,
-      behavior: 'instant' // Changé de 'smooth' à 'instant'
+      behavior: 'instant'
     });
   };
 
@@ -58,4 +58,4 @@ const FeaturedCard = () => {
   )
 }
 
-export default FeaturedCard
+export default FeaturedCard;
