@@ -36,43 +36,137 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(validated_data['password'])
         instance.save()
         return instance
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return {
+            # 'data':{
+            'id': representation['id'],
+            'username': instance.username,
+            'email': instance.email,
+            'first_name': instance.first_name,
+            'last_name': instance.last_name,
+            'telephone': instance.telephone,
+            'role': instance.role,
+            # }
+        }
 
 
-class TypesSerializer(serializers.ModelField):
+
+class TypesSerializer(serializers.ModelSerializer):
     class Meta:
+
         model = Types
-        fields = ('id', 'nom', 'description')
-        extra_kwargs = {}
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return {
+            # 'data': {
+                'id': representation['id'], 
+                'nom': instance.nom,
+                'description': instance.description,
+            # }
+        }
+
 
 
 class ImmobiliersSerializer(serializers.ModelSerializer):
     class Meta:
-        models = Immobiliers
+        model = Immobiliers
         fields = ('id', 'nom', 'adresse', 'superficie', 'montant', 'created_at', 'updated_at', 'id_type', 'id_proprietaire')
         exra_kwargs = {}
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return {
+            # 'data': {
+            #     'immobilier': {
+                    'id': representation['id'],
+                    'nom': instance.nom,
+                    'adresse': instance.adresse,
+                    'superficie': instance.superficie,
+                    'montant': instance.montant,
+                    'created_at': representation['created_at'],
+                    'updated_at': representation['updated_at'],
+                    'type': instance.id_type.nom,
+                    'proprietaire': instance.id_proprietaire.nom,
+            #     }
+            # }
+        }
+
 
 
 class NotificationsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notifications
-        fields = ('id', 'id_utilisateur', 'type', 'message', 'date')
-        extra_kwargs = {}
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return {
+            # 'data': {
+                'id_utilisateur': instance.id_utilisateur.nom,
+                'type': instance.type,  
+                'message': instance.message,
+                'date': instance.date,
+            # }
+        }
+
 
 class ContratsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contrats
-        fields = ('id', 'id_immobilier', 'id_locataire', 'date_debut', 'date_fin', 'montant', 'url_document', 'created_at')
-        extra_kwargs = {}
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return {
+            # 'data': {
+                'id_immobilier': instance.id_immobilier.nom,
+                'id_locataire': instance.id_locataire.nom,
+                'date_debut': instance.date_debut,
+                'date_fin': instance.date_fin,
+                'montant': instance.montant,
+                'url_document': instance.url_document,
+                'created_at': instance.created_at,
+                
+            # }
+        }
 
 
 class MoisSerializers(serializers.ModelSerializer):
     class Meta:
         model = Mois
-        fields = ('id', 'nom', 'annee', 'est_cloture')
-        extra_kwargs = {}
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return {
+            # 'data': {
+                'nom': instance.nom,
+                'annee': instance.annee,
+                'est_cloture': instance.est_cloture,
+            # }
+        }
+
+
 
 
 class PaiementsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Paiements
-        fields = ('id', 'id_contrat', 'id_mois', 'montant', 'date_paiement', 'methode_paiement', 'statut')
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return {
+            # 'data': {
+                'id_contrat': instance.id_contrat.id_immobilier.nom,
+                'id_mois': instance.id_mois.nom,
+                'montant': instance.montant,
+                'date_paiement': instance.date_paiement,
+                'methode_paiement': instance.methode_paiement,
+                'statut': instance.statut,
+            # }
+
+        }

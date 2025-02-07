@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import api from '../../api';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './login.css'
+import './login.css';
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -22,7 +23,7 @@ const Login = () => {
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
       alert('Login successful!');
-      navigate('/'); // Rediriger après connexion
+      navigate("/dashboard"); // Rediriger après connexion
     } catch (err) {
       setError('Invalid email or password');
     }

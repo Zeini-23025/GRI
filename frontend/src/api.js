@@ -49,4 +49,50 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+// Fonctions API pour chaque type de données
+const apiServices = {
+  // Immobiliers
+  immobiliers: {
+    list: () => api.get('/api/immobiliers/'),
+    get: (id) => api.get(`/api/immobiliers/${id}/`),
+    create: (data) => api.post('/api/immobiliers/create/', data),
+    update: (id, data) => api.put(`/api/immobiliers/${id}/update/`, data),
+    delete: (id) => api.delete(`/api/immobiliers/${id}/delete/`),
+  },
+
+  // Types
+  types: {
+    list: () => api.get('/api/types/'),
+    get: (id) => api.get(`/api/types/${id}/`),
+    create: (data) => api.post('/api/types/create/', data),
+    update: (id, data) => api.put(`/api/types/${id}/update/`, data),
+    delete: (id) => api.delete(`/api/types/${id}/delete/`),
+  },
+
+  // Contrats
+  contrats: {
+    list: () => api.get('/api/contrats/'),
+    get: (id) => api.get(`/api/contrats/${id}/`),
+    create: (data) => api.post('/api/contrats/create/', data),
+    update: (id, data) => api.put(`/api/contrats/${id}/update/`, data),
+    delete: (id) => api.delete(`/api/contrats/${id}/delete/`),
+  },
+
+  // Paiements
+  paiements: {
+    list: () => api.get('/api/paiements/'),
+    get: (id) => api.get(`/api/paiements/${id}/`),
+    create: (data) => api.post('/api/paiements/create/', data),
+    update: (id, data) => api.put(`/api/paiements/${id}/update/`, data),
+    delete: (id) => api.delete(`/api/paiements/${id}/delete/`),
+  },
+
+  // Utilisateurs
+  utilisateurs: {
+    list: () => api.get('/api/utilisateurs/'),
+    get: (id) => api.get(`/api/utilisateurs/${id}/`),
+    update: (id, data) => api.put(`/api/user/update/`, data),
+  },
+};
+
+export { api as default, apiServices };

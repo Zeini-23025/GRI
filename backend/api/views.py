@@ -3,9 +3,9 @@ from rest_framework.response import Response
 from rest_framework import status,generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Utilisateurs 
+from .models import *
 from django.contrib.auth.models import User 
-from .serializers import UserSerializer
+from .serializers import *
 
 class SignupView(generics.CreateAPIView):
     """
@@ -79,3 +79,122 @@ class UpdateUserView(APIView):
                 status=status.HTTP_200_OK
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CreateImmobilier(generics.CreateAPIView):
+    queryset = Immobiliers.objects.all()
+    serializer_class = ImmobiliersSerializer
+    permission_classes = [AllowAny]
+
+class UpdateImmobilier(generics.UpdateAPIView):
+    queryset = Immobiliers.objects.all()
+    serializer_class = ImmobiliersSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+class DeleteImmobilier(generics.DestroyAPIView):
+    queryset = Immobiliers.objects.all()
+    serializer_class = ImmobiliersSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+class ListImmobiliers(generics.ListAPIView):
+    queryset = Immobiliers.objects.all()
+    serializer_class = ImmobiliersSerializer
+    permission_classes = [AllowAny]
+
+class RetrieveImmobilier(generics.RetrieveAPIView):
+    queryset = Immobiliers.objects.all()
+    serializer_class = ImmobiliersSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+# Vues pour Types
+class CreateType(generics.CreateAPIView):
+    queryset = Types.objects.all()
+    serializer_class = TypesSerializer
+    permission_classes = [AllowAny]
+
+class UpdateType(generics.UpdateAPIView):
+    queryset = Types.objects.all()
+    serializer_class = TypesSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+class DeleteType(generics.DestroyAPIView):
+    queryset = Types.objects.all()
+    serializer_class = TypesSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+class ListTypes(generics.ListAPIView):
+    queryset = Types.objects.all()
+    serializer_class = TypesSerializer
+    permission_classes = [AllowAny]
+
+class RetrieveType(generics.RetrieveAPIView):
+    queryset = Types.objects.all()
+    serializer_class = TypesSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+
+
+# Vues pour Contrats
+class CreateContrat(generics.CreateAPIView):
+    queryset = Contrats.objects.all()
+    serializer_class = ContratsSerializer
+    permission_classes = [AllowAny]
+
+class UpdateContrat(generics.UpdateAPIView):
+    queryset = Contrats.objects.all()
+    serializer_class = ContratsSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+class DeleteContrat(generics.DestroyAPIView):
+    queryset = Contrats.objects.all()
+    serializer_class = ContratsSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+class ListContrats(generics.ListAPIView):
+    queryset = Contrats.objects.all()
+    serializer_class = ContratsSerializer
+    permission_classes = [AllowAny]
+
+class RetrieveContrat(generics.RetrieveAPIView):
+    queryset = Contrats.objects.all()
+    serializer_class = ContratsSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+
+# Vues pour Paiements
+class CreatePaiement(generics.CreateAPIView):
+    queryset = Paiements.objects.all()
+    serializer_class = PaiementsSerializer
+    permission_classes = [AllowAny]
+
+class UpdatePaiement(generics.UpdateAPIView):
+    queryset = Paiements.objects.all()
+    serializer_class = PaiementsSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+class DeletePaiement(generics.DestroyAPIView):
+    queryset = Paiements.objects.all()
+    serializer_class = PaiementsSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+class ListPaiements(generics.ListAPIView):
+    queryset = Paiements.objects.all()
+    serializer_class = PaiementsSerializer
+    permission_classes = [AllowAny]
+
+class RetrievePaiement(generics.RetrieveAPIView):
+    queryset = Paiements.objects.all()
+    serializer_class = PaiementsSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'

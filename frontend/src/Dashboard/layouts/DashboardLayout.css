@@ -1,0 +1,181 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f6f9;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 90px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  min-height: 100vh;
+  width: calc(100% - 90px);
+  overflow-x: hidden;
+}
+
+.main-content.sidebar-open {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 98;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(82, 81, 81, 0.08);
+  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 1rem;
+  background: #E4E9F7;
+  min-height: calc(100vh - 140px);
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.dashboard-footer {
+  background: #fff;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Media Queries pour la responsivité */
+@media screen and (max-width: 768px) {
+  .main-content,
+  .main-content.sidebar-open {
+    margin-left: 0;
+    width: 100%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dashboard-main {
+    padding: 0.75rem;
+  }
+
+  .sidebar {
+    position: fixed;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content.sidebar-open::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 97;
+    opacity: 0;
+    animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Ajustements pour les très petits écrans */
+@media screen and (max-width: 480px) {
+  .dashboard-main {
+    padding: 10px;
+  }
+
+  .dashboard-navbar {
+    padding: 10px;
+  }
+
+  .dashboard-footer {
+    padding: 10px;
+  }
+}
+
+/* Ajustements pour les grands écrans */
+@media screen and (min-width: 1400px) {
+  .dashboard-main {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+/* Styles pour le mode sombre (optionnel) */
+@media (prefers-color-scheme: dark) {
+  .dashboard-container {
+    background: #1a1a1a;
+  }
+
+  .dashboard-navbar,
+  .dashboard-footer {
+    background: #e0e0e0;
+    color: #fff;
+  }
+
+  .dashboard-main {
+    background: #e0e0e0;
+    color: #000000;
+  }
+}
+
+/* Animations */
+.main-content {
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar {
+  transition: transform 0.3s ease;
+}
+
+/* Styles pour améliorer la lisibilité du contenu */
+.dashboard-main {
+  line-height: 1.6;
+}
+
+/* Styles pour les scrollbars personnalisées */
+.dashboard-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dashboard-main::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dashboard-main::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.dashboard-main::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+/* Smooth transition for all transformable elements */
+.dashboard-navbar,
+.dashboard-main,
+.dashboard-footer {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Shadow animation */
+.dashboard-navbar:hover {
+  box-shadow: 0 4px 8px rgba(82, 81, 81, 0.12);
+} 
