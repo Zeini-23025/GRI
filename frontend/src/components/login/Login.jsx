@@ -22,7 +22,10 @@ const Login = () => {
       });
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
-      navigate('/'); // Rediriger après connexion
+      alert('Login successful!');
+      navigate("/dashboard"); // Rediriger après connexion
+      // alert('Login successful!');
+      // navigate('/'); // Rediriger après connexion
     } catch (err) {
       setError('Invalid email or password');
     }
