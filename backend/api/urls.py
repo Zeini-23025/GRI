@@ -2,8 +2,10 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
+
     path('signup/', SignupView.as_view(), name='signup'),
     path('login/', LoginView.as_view(), name='login'),
+    path('users/', ListUsers.as_view(), name='list-users'),
     path('user/update/', UpdateUserView.as_view(), name='update_user'),
     path('immobiliers/', ListImmobiliers.as_view(), name='list-immobiliers'),
     path('immobiliers/<int:id>/', RetrieveImmobilier.as_view(), name='retrieve-immobilier'),
@@ -25,4 +27,6 @@ urlpatterns = [
     path('paiements/create/', CreatePaiement.as_view(), name='create-paiement'),
     path('paiements/<int:id>/update/', UpdatePaiement.as_view(), name='update-paiement'),
     path('paiements/<int:id>/delete/', DeletePaiement.as_view(), name='delete-paiement'),
+    path('verify-token/', VerifyTokenView.as_view(), name='verify_token'),  # Nouvelle route
+
 ]

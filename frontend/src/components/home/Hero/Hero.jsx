@@ -7,7 +7,7 @@ const Hero = () => {
     <>
       <section className='hero'>
         <div className='container'>
-          <Heading title='Explorez les meilleures options immobilières pour vous' subtitle='Explorez une vaste sélection de biens à louer, soigneusement choisis pour correspondre à vos préférences, vos besoins et votre budget. Que vous recherchiez un logement confortable ou un espace professionnel idéal, Ijari vous aide à trouver l`endroit parfait où que vous soyez.' />
+          <Heading title='Explorez les meilleures options immobilières pour vous' subtitle='Explorez une vaste sélection de biens à louer, soigneusement choisis pour correspondre à vos préférences, vos besoins et votre budget. Que vous recherchiez un logement confortable ou un espace professionnel idéal, 3a9ari vous aide à trouver l`endroit parfait où que vous soyez.' />
 
           {/* <form className='flex'>
             <div className='box'>

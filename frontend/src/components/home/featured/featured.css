@@ -1,40 +1,147 @@
+.featured {
+  padding: 40px 0;
+  background: #f8f9fa;
+}
+
 .featured .box {
     box-shadow: 0 0 20px 0 rgb(112 121 138 / 18%);
     border-radius: 6px;
     text-align: center;
     padding: 30px;
     cursor: pointer;
-  }
-  .featured img {
+}
+
+.featured img {
     width: 65px;
     height: 65px;
     margin: auto;
-  }
+}
 
-  .contenu {
+.contenu {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
-    gap: 40px; /* Ajoute un espace entre les cartes */
+    flex-wrap: wrap;
+    gap: 40px;
     padding: 20px;
-  }
-  
-  .boxi {
+}
+
+.boxi {
     background-color: white;
     border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 20px;
-    width: 200px; /* Largeur fixe pour les cartes */
-    height: 200px;
-    
-    transition: transform 0.3s ease;
+    padding: 30px;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.boxi:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.boxi img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.boxi:hover img {
+    transform: scale(1.1);
+}
+
+.boxi h4 {
+    color: #2c3e50;
+    font-size: 1.5em;
+    margin: 15px 0;
+    font-weight: 600;
+}
+
+.boxi label {
+    color: #766525;
+    font-size: 1em;
+    display: block;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.boxi::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: #766525;
+  transition: width 0.3s ease;
+}
+
+.boxi:hover::after {
+  width: 100px;
+}
+
+/* Animation d'entrée pour les cartes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .boxi:hover {
-    transform: scale(1.05); /* Effet d'agrandissement au survol */
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+.boxi {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .contenu {
+        gap: 20px;
+        padding: 10px;
+    }
+
+    .boxi {
+        width: 250px;
+        height: 250px;
+        padding: 20px;
+    }
+
+    .boxi img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .boxi h4 {
+        font-size: 1.3em;
+    }
+}
   
-  
+.intro-text h2 {
+  color: #2c3e50;
+  font-size: 2em;
+  margin-bottom: 15px;
+  margin-left: 20px;
+}
+
+
+.intro-text p {
+  color: #666;
+  font-size: 1.1em;
+  line-height: 1.6;
+}

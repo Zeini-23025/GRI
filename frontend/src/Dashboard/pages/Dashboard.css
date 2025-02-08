@@ -1,6 +1,11 @@
+body{
+  background-color: #ffffff;
+}
+
 .dashboard-content {
   padding: 2rem;
 }
+
 
 .dashboard-header {
   display: flex;

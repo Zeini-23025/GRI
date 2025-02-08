@@ -15,8 +15,8 @@ const TypeList = () => {
       columns={columns}
       dataKey="type"
       searchFields={['nom', 'description']}
-      createPath="/dashboard/gestion-des-tables/type/create"
-      viewPath="/dashboard/gestion-des-tables/type"
+      createPath="/dashboard/gestion-des-tables/types/create"
+      viewPath="/dashboard/gestion-des-tables/types"
     />
   );
 };

@@ -11,6 +11,11 @@ import Contact from "../contact/Contact";
 // import Login from "../login/Login";
 import Login from "../login/Login";
 import Signup from "../signup/Signup";
+import HousesList from "../properties/HousesList";  
+import ApartmentsList from "../properties/ApartmentsList";
+import ShopsList from "../properties/ShopsList";
+import RentForm from "../rent/RentForm";
+import FilteredProperties from "../home/featured/FilteredProperties";
 
 // Dashboard imports
 import DashboardLayout from "../../Dashboard/layouts/DashboardLayout";
@@ -25,9 +30,14 @@ import TypeList from "../../Dashboard/components/Tables/TypeList";
 import ImmobilierList from "../../Dashboard/components/Tables/ImmobilierList";
 import UtilisateurList from "../../Dashboard/components/Tables/UtilisateurList";
 
+// Forms imports
+import ImmobilierForm from "../../Dashboard/components/Forms/ImmobilierForm";
+import TypesForm from "../../Dashboard/components/Forms/typesForm";
+
 const Pages = () => {
   return (
     <>
+
       <Router>
         <Routes>
           {/* Public Routes with Header and Footer */}
@@ -122,11 +132,31 @@ const Pages = () => {
             <Route path="gestion-des-tables">
               <Route path="contrat" element={<ContratList />} />
               <Route path="paiement" element={<PaiementList />} />
-              <Route path="type" element={<TypeList />} />
+              <Route path="types" element={<TypeList />} />
+              <Route path="types/create" element={<TypesForm />} />
+              <Route path="types/edit/:id" element={<TypesForm />} />
               <Route path="immobilier" element={<ImmobilierList />} />
+              <Route path="immobilier/create" element={<ImmobilierForm />} />
+              <Route path="immobilier/edit/:id" element={<ImmobilierForm />} />
+
               <Route path="utilisateur" element={<UtilisateurList />} />
             </Route>
+            
           </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/properties/:typeName" element={<FilteredProperties />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/properties/maisons" element={<HousesList />} />
+          <Route path="/properties/appartements" element={<ApartmentsList />} />
+          <Route path="/properties/boutiques" element={<ShopsList />} />
+          <Route path="/rent-form/:id" element={<RentForm />} />
+
         </Routes>
       </Router>
     </>

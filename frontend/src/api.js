@@ -49,7 +49,6 @@ api.interceptors.response.use(
   }
 );
 
-// Fonctions API pour chaque type de données
 const apiServices = {
   // Immobiliers
   immobiliers: {
@@ -89,7 +88,7 @@ const apiServices = {
 
   // Utilisateurs
   utilisateurs: {
-    list: () => api.get('/api/utilisateurs/'),
+    list: () => api.get('/api/users/'),
     get: (id) => api.get(`/api/utilisateurs/${id}/`),
     update: (id, data) => api.put(`/api/user/update/`, data),
   },

@@ -1,0 +1,263 @@
+.properties-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 40px;
+}
+
+.properties-container h2 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2.5em;
+  margin-bottom: 40px;
+  position: relative;
+  padding-bottom: 15px;
+  margin-top: 20px;
+}
+
+.properties-container h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: #766525;
+}
+
+.properties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.property-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.property-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.property-card:hover .property-image img {
+  transform: scale(1.1);
+}
+
+.status-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.status-badge.available {
+  background-color: #4CAF50;
+}
+
+.status-badge.rented {
+  background-color: #f44336;
+}
+
+.property-info {
+  padding: 15px;
+}
+
+.property-info h3 {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.expanded-content {
+  animation: fadeIn 0.3s ease;
+  margin-top: 15px;
+}
+
+.details-button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  background: #1d2636;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.details-button:hover {
+  background: #766525;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Styles pour le contenu étendu */
+.expanded-content .location,
+.expanded-content .basic-info,
+.expanded-content .expanded-info {
+  margin-bottom: 15px;
+}
+
+.property-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.property-details span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1d2636;
+}
+
+.expanded-info {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+  animation: fadeIn 0.3s ease;
+}
+
+.description {
+  line-height: 1.6;
+  color: #666;
+}
+
+.additional-details {
+  margin: 1.5rem 0;
+}
+
+.additional-details h4 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.additional-details ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.additional-details li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+.rent-button {
+  background-color: #1d2636;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.rent-button:hover {
+  background-color: #5a4e1d;
+}
+
+/* Animation d'entrée pour les cartes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.property-card {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .properties-container h2 {
+    font-size: 2em;
+  }
+
+  .properties-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .property-info h3 {
+    font-size: 1.2em;
+  }
+
+  .property-details {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .property-details span {
+    justify-content: center;
+  }
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  z-index: 10;
+}
+
+.back-button img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+} 

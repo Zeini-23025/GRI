@@ -2,31 +2,81 @@
   position: fixed;
   left: 0;
   top: 0;
-  height: 100%;
+  height: 100vh;
   width: 90px;
   background: #ffffff;
   padding: 2px 14px;
   z-index: 99;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   color: #11101d;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar.open {
   width: 250px;
 }
 
-sidebar.open .nav-list-container .nav-list{
-  overflow-y: auto;
-}
-
+/* Logo section - fixed at top */
 .logo-details {
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 2;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
+/* Navigation list container - scrollable */
+.nav-list-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px; /* Pour le scrollbar */
+  margin-right: -8px; /* Compenser le padding */
+}
+
+/* Customiser la scrollbar */
+.nav-list-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.nav-list-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.nav-list-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.nav-list-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Profile section - fixed at bottom */
+.profile {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 78px;
+  background: #ffffff;
+  padding: 10px;
+  border-top: 1px solid #f0f0f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+.profile.open {
+  width: 250px;
+}
+
+/* Rest of your existing CSS */
 .logo-content {
   display: flex;
   align-items: center;
@@ -53,9 +103,8 @@ sidebar.open .nav-list-container .nav-list{
 }
 
 .nav-list {
-  margin-top: 20px;
-  height: 100%;
-  padding: 0;
+  margin: 0;
+  padding: 20px 0;
   list-style: none;
 }
 
@@ -70,12 +119,18 @@ sidebar.open .nav-list-container .nav-list{
 .search-input {
   width: 100%;
   padding: 10px 35px;
-  background: #1d1b31;
-  border: none;
-  border-radius: 12px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
   color: #11101d;
   font-size: 15px;
   outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #90b3ff;
+  box-shadow: 0 0 0 2px rgba(144, 179, 255, 0.1);
 }
 
 .search-icon {
@@ -88,8 +143,7 @@ sidebar.open .nav-list-container .nav-list{
 
 .nav-item {
   position: relative;
-  margin: 8px 4px;
-  list-style: none;
+  margin: 8px 0;
 }
 
 .nav-link {
@@ -97,14 +151,12 @@ sidebar.open .nav-list-container .nav-list{
   align-items: center;
   text-decoration: none;
   padding: 12px;
-  padding-left: 2px;
-  padding-right: 2px;
-  border-radius: 12px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
 .nav-link:hover {
-  background: #90b3ff;
+  background: #f0f7ff;
 }
 
 .nav-icon {
@@ -113,62 +165,39 @@ sidebar.open .nav-list-container .nav-list{
   min-width: 50px;
 }
 
-.nav-link:hover .nav-icon {
-  color: #3f3f3f;
-}
-
 .nav-text {
   color: #11101d;
   font-size: 15px;
   white-space: nowrap;
 }
 
-.nav-link:hover .nav-text {
+/* Submenu styling */
+.sub-menu {
+  padding-left: 50px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.sub-menu.active {
+  max-height: 500px; /* Ajuster selon vos besoins */
+  transition: max-height 0.3s ease-in;
+}
+
+.sub-link {
+  display: block;
+  padding: 10px 0;
   color: #11101d;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
 }
 
-.tooltip {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: calc(100% + 15px);
-  z-index: 3;
-  background: #90b3ff;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-  padding: 10px 14px;
-  margin-left: 5px;
-  border-radius: 4px;
-  font-size: 15px;
-  font-weight: 400;
-  opacity: 0;
-  white-space: nowrap;
-  pointer-events: none;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #ffffff;
-  font-weight: 500;
+.sub-link:hover {
+  color: #90b3ff;
 }
 
-.nav-item:hover .tooltip {
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.profile {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 78px;
-  background: #ffffff;
-  padding: 10px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #11101d;
-}
-
-.profile.open {
-  width: 250px;
-}
-
+/* Profile styling */
 .profile-details {
   display: flex;
   align-items: center;
@@ -182,16 +211,22 @@ sidebar.open .nav-list-container .nav-list{
   border-radius: 6px;
 }
 
+.profile-info {
+  flex: 1;
+}
+
 .profile-name {
   color: #11101d;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 500;
+  margin: 0;
 }
 
 .profile-role {
   color: #11101d;
   font-size: 12px;
-  opacity: 0.6;
+  opacity: 0.7;
+  margin: 0;
 }
 
 .logout-btn {
@@ -199,10 +234,48 @@ sidebar.open .nav-list-container .nav-list{
   background: none;
   border: none;
   cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #f0f7ff;
+}
+
+/* Tooltip */
+.tooltip {
   position: absolute;
-  right: 10px;
+  left: 100%;
   top: 50%;
   transform: translateY(-50%);
+  background: #11101d;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+.nav-item:hover .tooltip {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 0;
+    padding: 0;
+  }
+
+  .sidebar.open {
+    width: 250px;
+    padding: 2px 14px;
+  }
 }
 
 .home-section {
@@ -231,71 +304,4 @@ sidebar.open .nav-list-container .nav-list{
 
 .hidden {
   display: none;
-}
-
-.sub-menu {
-  position: static;
-  width: 100%;
-  background: #ffffff;
-  padding: 0;
-  display: none;
-  box-shadow: none;
-}
-
-/* Show submenu only when active */
-.sub-menu.active {
-  display: block;
-  animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.sub-link {
-  display: block;
-  padding: 8px 12px;
-  padding-left: 50px; /* Indent submenu items */
-  color: #11101d;
-  text-decoration: none;
-  font-size: 14px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sub-link:hover {
-  background: #90b3ff;
-  color: #ffffff;
-}
-
-/* Adjust spacing */
-.nav-item {
-  margin: 4px 0;
-}
-
-.sub-menu li {
-  margin: 2px 0;
-}
-
-/* Hide submenu when sidebar is closed */
-.sidebar:not(.open) .sub-menu {
-  display: none !important;
-}
-
-/* Ensure submenu stays within sidebar width */
-.sidebar.open .sub-menu {
-  max-width: 250px; /* Same as sidebar open width */
-}
-
-.sidebar:not(.open) .sub-menu {
-  max-width: 90px; /* Same as sidebar closed width */
 }

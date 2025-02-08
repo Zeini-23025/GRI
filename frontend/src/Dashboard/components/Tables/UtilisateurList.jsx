@@ -1,5 +1,6 @@
 import React from 'react';
 import TableList from './Common/TableList';
+import { apiServices } from '../../../api';
 
 const UtilisateurList = () => {
   const columns = [
@@ -8,22 +9,33 @@ const UtilisateurList = () => {
     { field: 'first_name', header: 'Prénom' },
     { field: 'last_name', header: 'Nom' },
     { field: 'telephone', header: 'Téléphone' },
-    { field: 'role', header: 'Rôle' },
+    { field: 'role', header: 'Rôle' }
   ];
 
   const transformData = (item, field) => {
-    if (field === 'role') {
-      return item[field] === 'client' ? 'Client' : 'Fournisseur';
+    switch (field) {
+      case 'role':
+        return item[field] === 'client' ? 'Client' : 'Fournisseur';
+      case 'telephone':
+        return item[field] || 'Non spécifié';
+      case 'first_name':
+      case 'last_name':
+        return item[field] || 'Non spécifié';
+      case 'email':
+        return item[field] || 'Non spécifié';
+      case 'username':
+        return item[field] || 'Non spécifié';
+      default:
+        return item[field];
     }
-    return item[field];
   };
 
   return (
     <TableList
       title="Utilisateurs"
-      endpoint="utilisateurs"
+      endpoint="users"
       columns={columns}
-      dataKey="user"
+      dataKey="users"
       searchFields={['username', 'email', 'first_name', 'last_name', 'role']}
       createPath="/dashboard/gestion-des-tables/utilisateur/create"
       viewPath="/dashboard/gestion-des-tables/utilisateur"

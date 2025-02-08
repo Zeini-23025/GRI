@@ -6,6 +6,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import *
 from django.contrib.auth.models import User 
 from .serializers import *
+from rest_framework import status
+
+
 
 class SignupView(generics.CreateAPIView):
     """
@@ -62,7 +65,12 @@ class LoginView(APIView):
                 status=status.HTTP_404_NOT_FOUND
             )
 
+class ListUsers(generics.ListAPIView):
+    queryset = Utilisateurs.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
+    
 class UpdateUserView(APIView):
     """
     Vue pour permettre à un utilisateur connecté de modifier ses informations.
@@ -198,3 +206,18 @@ class RetrievePaiement(generics.RetrieveAPIView):
     serializer_class = PaiementsSerializer
     permission_classes = [AllowAny]
     lookup_field = 'id'
+class VerifyTokenView(APIView):
+    """
+    Vue pour vérifier la validité du token JWT.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({
+            "valid": True,
+            "user": {
+                "username": request.user.username,
+                "email": request.user.email,
+                "role": request.user.role
+            }
+        })

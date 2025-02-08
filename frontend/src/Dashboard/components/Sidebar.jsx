@@ -16,11 +16,13 @@ import {
 
 } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { useLogout } from '../../components/common/header/logout';
 
 import './Sidebar.css'; // N'oubliez pas de créer ce fichier CSS
 
 function Sidebar({ isOpen, setIsOpen }) {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
+  const handleLogout = useLogout();
 
   const handleSubmenuClick = (index, e) => {
     e.preventDefault(); // Prevent navigation
@@ -51,7 +53,7 @@ function Sidebar({ isOpen, setIsOpen }) {
       path: '/dashboard/gestion-des-tables',
       subItems: [
         { text: 'Immobiliers', path: '/dashboard/gestion-des-tables/immobilier' },
-        { text: 'Types', path: '/dashboard/gestion-des-tables/type' },
+        { text: 'Types', path: '/dashboard/gestion-des-tables/types' },
         { text: 'Contrats', path: '/dashboard/gestion-des-tables/contrat' },
         { text: 'Paiements', path: '/dashboard/gestion-des-tables/paiement' },
         { text: 'Utilisateurs', path: '/dashboard/gestion-des-tables/utilisateur' },
@@ -145,7 +147,7 @@ function Sidebar({ isOpen, setIsOpen }) {
             <p className="profile-role">Web designer</p>
           </div>
         </div>
-        <button className="logout-btn">
+        <button className="logout-btn" onClick={handleLogout}>
           <FontAwesomeIcon icon={faSignOutAlt} />
         </button>
       </div>

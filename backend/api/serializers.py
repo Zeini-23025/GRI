@@ -36,6 +36,7 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(validated_data['password'])
         instance.save()
         return instance
+    
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         return {
