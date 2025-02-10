@@ -18,7 +18,7 @@ import {
 import { useState } from 'react';
 import { useLogout } from '../../components/common/header/logout';
 
-import './Sidebar.css'; // N'oubliez pas de créer ce fichier CSS
+import './Sidebar.css'; 
 
 function Sidebar({ isOpen, setIsOpen }) {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
@@ -40,11 +40,11 @@ function Sidebar({ isOpen, setIsOpen }) {
       text: 'Transactions', 
       path: '/dashboard/transactions',
       subItems: [
-        { text: 'Recent', path: '/dashboard/transactions/recent' },
+        { text: 'Recent', path: '/dashboard/transactions' },
         { text: 'History', path: '/dashboard/transactions/history' }
       ]
     },
-    { icon: faCog, text: 'Revenue', path: '/dashboard/rvenues' },
+    { icon: faCog, text: 'Revenue', path: '/dashboard/revenues' },
     { icon: faCog, text: 'Retad', path: '/dashboard/retard' },
     { icon: faComments, text: 'Statistique', path: '/dashboard/statistique' },
     { 
@@ -59,14 +59,7 @@ function Sidebar({ isOpen, setIsOpen }) {
         { text: 'Utilisateurs', path: '/dashboard/gestion-des-tables/utilisateur' },
       ]
     },
-    { icon: faFolder, text: 'File Manager', path: '/dashboard/files' },
 
-    { icon: faShoppingCart, text: 'Order', path: '/dashboard/orders' },
-    { icon: faHeart, text: 'Saved', path: '/dashboard/saved' },
-
-    { icon: faCog, text: 'Setting', path: '/dashboard/settings' },
-    { icon: faCog, text: 'Setting', path: '/dashboard/settings' },
-    { icon: faCog, text: 'Setting', path: '/dashboard/settings' },
     { icon: faCog, text: 'Setting', path: '/dashboard/settings' },
   ];
 
@@ -134,23 +127,6 @@ function Sidebar({ isOpen, setIsOpen }) {
         </ul>
       </div>
 
-      {/* Profile Section */}
-      <div className={`profile ${isOpen ? 'open' : ''}`}>
-        <div className="profile-details">
-          <img
-            src="/profile-placeholder.jpg"
-            alt="Profile"
-            className="profile-image"
-          />
-          <div className={`profile-info ${!isOpen && 'hidden'}`}>
-            <p className="profile-name">Prem Shahi</p>
-            <p className="profile-role">Web designer</p>
-          </div>
-        </div>
-        <button className="logout-btn" onClick={handleLogout}>
-          <FontAwesomeIcon icon={faSignOutAlt} />
-        </button>
-      </div>
     </div>
   );
 }

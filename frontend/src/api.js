@@ -2,9 +2,11 @@ import axios from "axios";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000", // Assurez-vous que cette URL est correcte
+  // baseURL: "http://172.20.10.2:8000", // yleyn t3a9a t3oud dor ted5el mn telefoune
+  baseURL: "http://localhost:8000", //
   headers: { "Content-Type": "application/json" },
 });
+
 
 // Interceptor pour ajouter le token d'accès dans les en-têtes des requêtes
 api.interceptors.request.use(

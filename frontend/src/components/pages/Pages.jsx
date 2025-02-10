@@ -22,12 +22,14 @@ import DashboardLayout from "../../Dashboard/layouts/DashboardLayout";
 import Dashboard from "../../Dashboard/pages/Dashboard";
 import Profile from "../../Dashboard/pages/Profile";
 import Settings from "../../Dashboard/pages/Settings";
-
+import Revenue from "../../Dashboard/pages/Revenue";
+import Transactions from "../../Dashboard/pages/Transactions";
 // Tables imports
 import ContratList from "../../Dashboard/components/Tables/ContratList";
 import PaiementList from "../../Dashboard/components/Tables/PaiementList";
 import TypeList from "../../Dashboard/components/Tables/TypeList";
 import ImmobilierList from "../../Dashboard/components/Tables/ImmobilierList";
+
 import UtilisateurList from "../../Dashboard/components/Tables/UtilisateurList";
 
 // Forms imports
@@ -127,7 +129,9 @@ const Pages = () => {
             <Route index element={<Dashboard />} />
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
-            
+            <Route path="revenues" element={<Revenue />} />
+            <Route path="transactions" element={<Transactions />} />
+
             {/* Gestion des Tables Routes */}
             <Route path="gestion-des-tables">
               <Route path="contrat" element={<ContratList />} />

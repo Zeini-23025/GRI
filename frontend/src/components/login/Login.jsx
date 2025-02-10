@@ -5,6 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
 
 
+const fields = [
+  
+] 
+
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +24,7 @@ const Login = () => {
       const response = await api.post('/api/token/', {
         username,
         password,
-      });
+      });                   
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
       // navigate("/dashboard"); // Rediriger après connexion

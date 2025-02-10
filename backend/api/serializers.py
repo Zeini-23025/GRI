@@ -162,12 +162,17 @@ class PaiementsSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         return {
             # 'data': {
-                'id_contrat': instance.id_contrat.id_immobilier.nom,
-                'id_mois': instance.id_mois.nom,
+                'id': instance.id,
+                'locataire': instance.id_contrat.id_locataire.nom + ' ' + str(instance.id_contrat.id_locataire.prenom),
+                'mois': instance.id_mois.nom + ' ' + str(instance.id_mois.annee),
                 'montant': instance.montant,
                 'date_paiement': instance.date_paiement,
                 'methode_paiement': instance.methode_paiement,
                 'statut': instance.statut,
+                'contrat': instance.id_contrat.id,
+                'id_mois': instance.id_mois.id,
+
             # }
+
 
         }
