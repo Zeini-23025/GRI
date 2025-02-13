@@ -45,7 +45,7 @@ const ShopsList = () => {
       return;
     }
 
-    navigate(`/rent-form/${shopId}`);
+    navigate(`/demandes/${shopId}`);
     window.scrollTo({
       top: 0,
       behavior: 'instant'

@@ -9,8 +9,8 @@ const Signup = () => {
     username: '',
     email: '',
     password: '',
-    first_name: '',
-    last_name: '',
+    nom: '',
+    prenom: '',
     telephone: '',
     role: 'client', // Par défaut, rôle client
   });
@@ -26,39 +26,60 @@ const Signup = () => {
     setError('');
 
     try {
-      await api.post('/api/signup/', formData);
-      Swal.fire({
-        icon: 'success',
-        title: 'Inscription réussie!',
-        text: 'Vous allez être redirigé vers la page de connexion',
-        timer: 2000,
-        showConfirmButton: false
-      }).then(() => {
-        navigate('/login');
-      });
+      const response = await api.post('/api/signup/', formData);
+      if (response.status === 201) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Inscription réussie!',
+          text: 'Vous allez être redirigé vers la page de connexion',
+          timer: 2000,
+          showConfirmButton: false
+        }).then(() => {
+          navigate('/login');
+        });
+      }
     } catch (err) {
-      setError('Erreur lors de l\'inscription. Veuillez réessayer.');
+      if (err.response && err.response.data) {
+        // Gestion des erreurs spécifiques du serveur
+        const errors = err.response.data;
+        let errorMessage = '';
+        
+        // Parcourir les erreurs et les formater
+        Object.keys(errors).forEach(key => {
+          errorMessage += `${key}: ${errors[key].join(', ')}\n`;
+        });
+        
+        setError(errorMessage || 'Erreur lors de l\'inscription. Veuillez réessayer.');
+      } else {
+        setError('Erreur lors de l\'inscription. Veuillez réessayer.');
+      }
     }
   };
 
-  const handleSignupClick = () => {
-    navigate('/login'); // Rediriger vers la page d'inscription
+  const handleLoginClick = () => {
+    navigate('/login');
     window.scrollTo({
       top: 0,
-      behavior: 'instant' // Changement immédiat sans animation
+      behavior: 'instant'
     });
   };
+
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card shadow-lg">
             <div className="card-body">
-              <h2 className="text-center">Inscription</h2>
+              <h2 className="text-center mb-4">Inscription</h2>
+              {error && (
+                <div className="alert alert-danger" role="alert">
+                  {error}
+                </div>
+              )}
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="username" className="form-label">
-                    Username:
+                    Nom d'utilisateur:
                   </label>
                   <input
                     type="text"
@@ -86,7 +107,7 @@ const Signup = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">
-                    Mot de passe :
+                    Mot de passe:
                   </label>
                   <input
                     type="password"
@@ -99,76 +120,61 @@ const Signup = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="first_name" className="form-label">
+                  <label htmlFor="nom" className="form-label">
                     Nom:
                   </label>
                   <input
                     type="text"
-                    id="first_name"
-                    name="first_name"
+                    id="nom"
+                    name="nom"
                     className="form-control"
-                    value={formData.first_name}
+                    value={formData.nom}
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="last_name" className="form-label">
-                    Prenom :
+                  <label htmlFor="prenom" className="form-label">
+                    Prénom:
                   </label>
                   <input
                     type="text"
-                    id="last_name"
-                    name="last_name"
+                    id="prenom"
+                    name="prenom"
                     className="form-control"
-                    value={formData.last_name}
+                    value={formData.prenom}
                     onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="telephone" className="form-label">
-                    Telephone:
+                    Téléphone:
                   </label>
                   <input
-                    type="text"
+                    type="tel"
                     id="telephone"
                     name="telephone"
                     className="form-control"
                     value={formData.telephone}
                     onChange={handleChange}
+                    required
                   />
                 </div>
-                {/* <div className="mb-3">
-                  <label htmlFor="role" className="form-label">
-                    Role:
-                  </label>
-                  <select
-                    id="role"
-                    name="role"
-                    className="form-select"
-                    value={formData.role}
-                    onChange={handleChange}
-                  >
-                    <option value="client">Client</option>
-                    <option value="provider">Provider</option>
-                  </select>
-                </div> */}
-                {error && <p className="text-danger">{error}</p>}
-                <div className="text-center">
-                <button type="submit" className="btn custom-signup-btn">
+                <button type="submit" className="btn btn-primary w-100">
                   S'inscrire
                 </button>
-                </div>
               </form>
-              <p className="text-center">
-              Avez vous déja un compte ?{' '}
-              <button
-                type="button"
-                className="btn btn-link"
-                onClick={handleSignupClick}
-              >
-                Se connecter
-              </button>
-            </p>
+              <p className="text-center mt-3">
+                Déjà inscrit?{' '}
+                <button
+                  type="button"
+                  className="btn btn-link p-0"
+                  onClick={handleLoginClick}
+                >
+                  Se connecter
+                </button>
+              </p>
             </div>
           </div>
         </div>

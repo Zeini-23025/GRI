@@ -44,6 +44,7 @@ function Sidebar({ isOpen, setIsOpen }) {
         { text: 'History', path: '/dashboard/transactions/history' }
       ]
     },
+    { icon: faCog, text: 'Demandes', path: '/dashboard/demandes' },
     { icon: faCog, text: 'Revenue', path: '/dashboard/revenues' },
     { icon: faCog, text: 'Retad', path: '/dashboard/retard' },
     { icon: faComments, text: 'Statistique', path: '/dashboard/statistique' },

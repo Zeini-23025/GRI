@@ -1,0 +1,35 @@
+{
+  "title": "Conditions de Location",
+  "version": "1.0",
+  "lastUpdated": "2024-03-20",
+  "conditions": [
+    {
+      "id": 1,
+      "title": "Paiement",
+      "details": [
+        "Le loyer doit être payé avant le 5 de chaque mois",
+        "Une caution de 2 mois de loyer est exigée",
+        "Les charges sont incluses dans le loyer"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Occupation",
+      "details": [
+        "Le bien doit être utilisé comme résidence principale",
+        "Toute sous-location est interdite",
+        "Le nombre maximum d'occupants est limité selon la superficie"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Entretien",
+      "details": [
+        "Le locataire est responsable de l'entretien courant",
+        "Toute modification doit être approuvée par le propriétaire",
+        "Les réparations majeures sont à la charge du propriétaire"
+      ]
+    }
+  ],
+  "legalText": "En acceptant ces conditions, vous vous engagez à respecter l'ensemble des règles établies par le propriétaire..."
+} 

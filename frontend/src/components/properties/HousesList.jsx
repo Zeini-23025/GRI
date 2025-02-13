@@ -45,7 +45,7 @@ const HousesList = () => {
 
     }
 
-    navigate(`/rent-form/${houseId}`);
+    navigate(`/demandes/${houseId}`);
     window.scrollTo({
       top: 0,
       behavior: 'instant'

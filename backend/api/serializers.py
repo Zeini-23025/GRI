@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import *   
+import re
+import datetime
 
 class UserSerializer(serializers.ModelSerializer):
     """
@@ -7,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Utilisateurs
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'password', 'telephone', 'role')
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'password', 'telephone', 'role', 'nom', 'prenom', 'is_superuser')
         extra_kwargs = {
             'password': {'write_only': True},
             'email': {'required': True},
@@ -18,10 +20,12 @@ class UserSerializer(serializers.ModelSerializer):
             username=validated_data['username'],
             email=validated_data['email'],
             password=validated_data['password'],
-            first_name=validated_data.get('first_name', ''),
-            last_name=validated_data.get('last_name', ''),
+            # first_name=validated_data.get('first_name', ''),
+            # last_name=validated_data.get('last_name', ''),
             telephone=validated_data.get('telephone', ''),
             role=validated_data.get('role', 'client'),
+            nom=validated_data.get('nom', ''),
+            prenom=validated_data.get('prenom', ''),
         )
         return user
 
@@ -31,7 +35,10 @@ class UserSerializer(serializers.ModelSerializer):
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.telephone = validated_data.get('telephone', instance.telephone)
+        instance.nom = validated_data.get('nom', instance.nom)
+        instance.prenom = validated_data.get('prenom', instance.prenom)
         instance.role = validated_data.get('role', instance.role)
+        instance.is_superuser = validated_data.get('is_superuser', instance.is_superuser)
         if 'password' in validated_data:
             instance.set_password(validated_data['password'])
         instance.save()
@@ -175,4 +182,44 @@ class PaiementsSerializer(serializers.ModelSerializer):
             # }
 
 
+        }
+
+class DemandesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Demandes
+        fields = '__all__'
+
+    def validate(self, data):
+        # Valider l'email
+        if not re.match(r'^[^\s@]+@[^\s@]+\.[^\s@]+$', data.get('email', '')):
+            raise serializers.ValidationError({'email': 'Format d\'email invalide'})
+
+        # Valider la durée
+        if data.get('duree', 0) <= 0:
+            raise serializers.ValidationError({'duree': 'La durée doit être un nombre positif'})
+
+        # Valider la date de début
+        if data.get('date_debut') and data.get('date_debut') < datetime.date.today():
+            raise serializers.ValidationError({'date_debut': 'La date de début doit être ultérieure à aujourd\'hui'})
+
+        return data
+
+    def create(self, validated_data):
+        # S'assurer que le statut est "en_attente" à la création
+        validated_data['statut'] = 'en_attente'
+        return super().create(validated_data)
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return {
+            'id': instance.id,
+            'nom_complet': instance.nom_complet,
+            'email': instance.email,
+            'telephone': instance.telephone,
+            'date_debut': instance.date_debut,
+            'duree': instance.duree,
+            'message': instance.message,
+            'date_demande': instance.date_demande,
+            'statut': instance.statut,
+            'immobilier': instance.id_immobilier.nom
         }

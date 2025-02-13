@@ -6,7 +6,7 @@ urlpatterns = [
     path('signup/', SignupView.as_view(), name='signup'),
     path('login/', LoginView.as_view(), name='login'),
     path('users/', ListUsers.as_view(), name='list-users'),
-    path('user/update/', UpdateUserView.as_view(), name='update_user'),
+    path('user/update/<int:id>/', UpdateUserView.as_view(), name='update_user'),
     path('immobiliers/', ListImmobiliers.as_view(), name='list-immobiliers'),
     path('immobiliers/<int:id>/', RetrieveImmobilier.as_view(), name='retrieve-immobilier'),
     path('immobiliers/create/', CreateImmobilier.as_view(), name='create-immobilier'),
@@ -28,5 +28,9 @@ urlpatterns = [
     path('paiements/<int:id>/update/', UpdatePaiement.as_view(), name='update-paiement'),
     path('paiements/<int:id>/delete/', DeletePaiement.as_view(), name='delete-paiement'),
     path('verify-token/', VerifyTokenView.as_view(), name='verify_token'),  # Nouvelle route
-
+    path('demandes/', ListDemandes.as_view(), name='list-demandes'),
+    path('demandes/create/', CreateDemande.as_view(), name='create-demande'),
+    path('demandes/<int:id>/update/', UpdateDemande.as_view(), name='update-demande'),
+    path('demandes/<int:id>/accepter/', AccepterDemandeView.as_view(), name='accepter-demande'),
+    path('demandes/<int:id>/refuser/', RefuserDemandeView.as_view(), name='refuser-demande'),
 ]

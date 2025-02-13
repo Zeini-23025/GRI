@@ -96,3 +96,26 @@ class Paiements(models.Model):  # Renommé en PascalCase
 
     def __str__(self):
         return f"Paiement: {self.id_contrat}  {self.montant} MRU"
+
+
+class Demandes(models.Model):
+    nom_complet = models.CharField(max_length=255)
+    email = models.EmailField()
+    telephone = models.CharField(max_length=50)
+    date_debut = models.DateField()
+    duree = models.IntegerField()  # durée en mois
+    message = models.TextField(blank=True, null=True)
+    date_demande = models.DateTimeField(auto_now_add=True)
+    statut = models.CharField(
+        max_length=50,
+        choices=[
+            ('en_attente', 'En attente'),
+            ('acceptee', 'Acceptée'),
+            ('refusee', 'Refusée')
+        ],
+        default='En attente'
+    )
+    id_immobilier = models.ForeignKey(Immobiliers, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Demande de {self.nom_complet} pour {self.id_immobilier.nom}"

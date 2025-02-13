@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-dqj5zx+z0&&83gdk1e0w*ufa1zioe6(^xq^5zhf$_(vbefo$4z
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # 'adresse ip', 
+    '192.168.100.14', 
     'localhost', 
     '127.0.0.1',
     ]
@@ -75,7 +75,7 @@ AUTH_USER_MODEL = 'api.Utilisateurs'
 # Autoriser les requêtes provenant de votre frontend
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
-      'http://172.20.10.2:5173',  # URL de votre application Vite
+      'http://192.168.100.14:5173',  # URL de votre application Vite
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'backend.urls'

@@ -24,6 +24,9 @@ import Profile from "../../Dashboard/pages/Profile";
 import Settings from "../../Dashboard/pages/Settings";
 import Revenue from "../../Dashboard/pages/Revenue";
 import Transactions from "../../Dashboard/pages/Transactions";
+import DemandForm from "../rent/demandForm";
+import Demandes from "../../Dashboard/pages/Demandes";
+
 // Tables imports
 import ContratList from "../../Dashboard/components/Tables/ContratList";
 import PaiementList from "../../Dashboard/components/Tables/PaiementList";
@@ -131,6 +134,7 @@ const Pages = () => {
             <Route path="settings" element={<Settings />} />
             <Route path="revenues" element={<Revenue />} />
             <Route path="transactions" element={<Transactions />} />
+            <Route path="demandes" element={<Demandes />} />
 
             {/* Gestion des Tables Routes */}
             <Route path="gestion-des-tables">
@@ -159,7 +163,10 @@ const Pages = () => {
           <Route path="/properties/maisons" element={<HousesList />} />
           <Route path="/properties/appartements" element={<ApartmentsList />} />
           <Route path="/properties/boutiques" element={<ShopsList />} />
-          <Route path="/rent-form/:id" element={<RentForm />} />
+          {/* <Route path="/rent-form/:id" element={<RentForm />} />
+           */}
+          <Route path="demandes/:id" element={<DemandForm />} />
+
 
         </Routes>
       </Router>

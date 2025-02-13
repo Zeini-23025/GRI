@@ -2,7 +2,7 @@ import axios from "axios";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "./constants";
 
 const api = axios.create({
-  // baseURL: "http://172.20.10.2:8000", // yleyn t3a9a t3oud dor ted5el mn telefoune
+  // baseURL: "http://192.168.100.14:8000", // yleyn t3a9a t3oud dor ted5el mn telefoune
   baseURL: "http://localhost:8000", //
   headers: { "Content-Type": "application/json" },
 });
@@ -93,6 +93,16 @@ const apiServices = {
     list: () => api.get('/api/users/'),
     get: (id) => api.get(`/api/utilisateurs/${id}/`),
     update: (id, data) => api.put(`/api/user/update/`, data),
+  },
+
+  // Demandes
+  demandes: {
+    list: () => api.get('/api/demandes/'),
+    create: (data) => api.post('/api/demandes/create/', data),
+    update: (id, data) => api.put(`/api/demandes/${id}/update/`, data),
+    get: (id) => api.get(`/api/demandes/${id}/`),
+    accepter: (id) => api.put(`/api/demandes/${id}/accepter/`),
+    refuser: (id) => api.put(`/api/demandes/${id}/refuser/`),
   },
 };
 
