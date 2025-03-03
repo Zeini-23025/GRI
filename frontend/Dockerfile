@@ -1,21 +1,19 @@
-# Utilisation de Node.js
-FROM node:18
+# Étape 1 : Build de l'application React
+FROM node:18 AS build
 
-# Définition du répertoire de travail
 WORKDIR /app
 
-# Copier package.json et installer les dépendances
-COPY package.json .
+# Copier uniquement les fichiers de dépendances pour optimiser le cache
+COPY package.json package-lock.json ./
+
+# Supprimer les anciennes installations pour éviter les bugs
+RUN rm -rf node_modules package-lock.json && npm cache clean --force
+
+# Réinstaller proprement les dépendances
 RUN npm install
 
-# Copier le reste du code
+# Copier le reste du projet
 COPY . .
 
 # Construire l'application React
 RUN npm run build
-
-# Utiliser nginx pour servir l'application
-FROM nginx:alpine
-COPY --from=0 /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]

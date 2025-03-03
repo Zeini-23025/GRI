@@ -2,16 +2,19 @@
 FROM python:3.10
 
 # Définir le répertoire de travail
-WORKDIR /api
+WORKDIR /app
 
-# Copier les fichiers du projet dans le conteneur
-COPY . .
+# Copier uniquement requirements.txt pour optimiser le cache
+COPY requirements.txt .
 
 # Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Exposer le port (par défaut Django utilise 8000)
+# Copier le reste des fichiers du projet
+COPY . .
+
+# Exposer le port (Django utilise généralement 8000)
 EXPOSE 8000
 
-# Commande pour exécuter l'application
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "api.wsgi:application"]
+# Commande pour exécuter le serveur Gunicorn avec Django
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "gri.wsgi:application"]
