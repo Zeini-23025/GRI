@@ -9,6 +9,7 @@ from .serializers import *
 from rest_framework import status
 
 
+    ##########################  user part    ##########################
 
 class SignupView(generics.CreateAPIView):
     """
@@ -115,6 +116,8 @@ class UpdateUserView(generics.UpdateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+    ##########################  immobiliers crud    ##########################
+
 class CreateImmobilier(generics.CreateAPIView):
     queryset = Immobiliers.objects.all()
     serializer_class = ImmobiliersSerializer
@@ -143,6 +146,7 @@ class RetrieveImmobilier(generics.RetrieveAPIView):
     permission_classes = [AllowAny]
     lookup_field = 'id'
 
+    ##########################  immobiliers crud    ##########################
 # Vues pour Types
 class CreateType(generics.CreateAPIView):
     queryset = Types.objects.all()
@@ -174,7 +178,9 @@ class RetrieveType(generics.RetrieveAPIView):
 
 
 
-# Vues pour Contrats
+    ##########################  Contrats crud    ##########################
+
+
 class CreateContrat(generics.CreateAPIView):
     queryset = Contrats.objects.all()
     serializer_class = ContratsSerializer
@@ -204,7 +210,9 @@ class RetrieveContrat(generics.RetrieveAPIView):
     lookup_field = 'id'
 
 
-# Vues pour Paiements
+    ##########################  Paiements crud    ##########################
+
+
 class CreatePaiement(generics.CreateAPIView):
     queryset = Paiements.objects.all()
     serializer_class = PaiementsSerializer
@@ -232,6 +240,8 @@ class RetrievePaiement(generics.RetrieveAPIView):
     serializer_class = PaiementsSerializer
     permission_classes = [AllowAny]
     lookup_field = 'id'
+
+    ##########################  token part    ##########################
 class VerifyTokenView(APIView):
     """
     Vue pour vérifier la validité du token JWT.
@@ -247,6 +257,7 @@ class VerifyTokenView(APIView):
                 "role": request.user.role
             }
         })
+    ##########################  Demande crud    ##########################
 
 class CreateDemande(generics.CreateAPIView):
     queryset = Demandes.objects.all()
