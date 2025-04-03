@@ -16,6 +16,8 @@ import ApartmentsList from "../properties/ApartmentsList";
 import ShopsList from "../properties/ShopsList";
 import RentForm from "../rent/RentForm";
 import FilteredProperties from "../home/featured/FilteredProperties";
+import UserProfilePage from "../UserProfile/UserProfile";
+import InboxPage from "../boit_reception/InboxPage";
 
 // Dashboard imports
 import DashboardLayout from "../../Dashboard/layouts/DashboardLayout";
@@ -39,6 +41,7 @@ import UtilisateurList from "../../Dashboard/components/Tables/UtilisateurList";
 import ImmobilierForm from "../../Dashboard/components/Forms/ImmobilierForm";
 import TypesForm from "../../Dashboard/components/Forms/typesForm";
 
+
 const Pages = () => {
   return (
     <>
@@ -46,6 +49,7 @@ const Pages = () => {
       <Router>
         <Routes>
           {/* Public Routes with Header and Footer */}
+
           <Route
             path="/"
             element={
@@ -143,7 +147,7 @@ const Pages = () => {
               <Route path="types" element={<TypeList />} />
               <Route path="types/create" element={<TypesForm />} />
               <Route path="types/edit/:id" element={<TypesForm />} />
-              <Route path="immobilier" element={<ImmobilierList />} />
+              <Route path="immobiliers" element={<ImmobilierList />} />
               <Route path="immobilier/create" element={<ImmobilierForm />} />
               <Route path="immobilier/edit/:id" element={<ImmobilierForm />} />
 
@@ -151,6 +155,9 @@ const Pages = () => {
             </Route>
             
           </Route>
+
+
+          
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
@@ -163,9 +170,13 @@ const Pages = () => {
           <Route path="/properties/maisons" element={<HousesList />} />
           <Route path="/properties/appartements" element={<ApartmentsList />} />
           <Route path="/properties/boutiques" element={<ShopsList />} />
+
+          <Route path="/User-Profile" element={<UserProfilePage />} />
+          <Route path="/Boit-de-reception" element={<InboxPage />} />
+
           {/* <Route path="/rent-form/:id" element={<RentForm />} />
            */}
-          <Route path="demandes/:id" element={<DemandForm />} />
+          <Route path="demandes/:id" element={<DemandForm immobilierId={3} />} />
 
 
         </Routes>

@@ -1,0 +1,11 @@
+{
+    "Accepter":{
+        "message": " Félicitations votre demande a été acceptée."
+        
+    },
+
+    "Refuser":{
+        "message": " Désolé votre demande a été refusée par le propriétaire. \n Merci de nous contacter pour plus d'informations."
+
+    }
+}

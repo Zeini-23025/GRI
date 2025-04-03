@@ -32,7 +32,7 @@
 .dashboard-breadcrumb {
   background: #f5f5f5;
   padding: 1rem 2rem;
-  border-bottom: 1px solid #e5e7eb;
+  /* border-bottom: 1px solid #e5e7eb; */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -110,10 +110,10 @@
 
 .dashboard-main {
   flex: 1;
-  padding: 2rem;
+  padding: 0px 2rem;
   background: #f5f5f5;
   max-width: 1400px;
-  margin: 0 auto;
+  margin:auto;
   width: 100%;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -139,9 +139,9 @@
     transform: translateX(250px);
   }
 
-  .dashboard-main {
+  /* .dashboard-main {
     padding: 1rem;
-  }
+  } */
 
   .breadcrumb-content {
     flex-direction: column;
@@ -175,9 +175,9 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .dashboard-main {
+  /* .dashboard-main {
     padding: 0.75rem;
-  }
+  } */
 
   .sidebar {
     position: fixed;
@@ -214,9 +214,9 @@
 
 /* Ajustements pour les très petits écrans */
 @media screen and (max-width: 480px) {
-  .dashboard-main {
+  /* .dashboard-main {
     padding: 10px;
-  }
+  } */
 
   .dashboard-navbar {
     padding: 10px;

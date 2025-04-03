@@ -1,12 +1,12 @@
 .transactions-page {
-  padding: 2rem;
+  padding: 0px 2rem;
 }
 
 .transactions-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
 }
 
 .transactions-header h1 {
@@ -17,6 +17,23 @@
 
 .transactions-header p {
   color: #6B7280;
+}
+
+
+.transaction-stats-grid{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transactions-filters{
+  margin: 20px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: none;
 }
 
 .export-btn {
@@ -80,24 +97,28 @@
 }
 
 /* Couleurs des badges */
-.status-badge.orange {
+.status-bg.orange {
   background-color: #fff3e6;
-  color: #ff9f43;
+  color: #ff830fbd;
+  padding: 10px 16px;
 }
 
-.status-badge.red {
+.status-bg.red {
   background-color: #ffe6e6;
-  color: #ff6b6b;
+  color: #ff1d1dbd;
+  padding: 10px 16px;
 }
 
-.status-badge.green {
+.status-bg.green {
   background-color: #e6ffe6;
-  color: #4caf50;
+  color: #23ff2bd8;
+  padding: 10px 16px;
 }
 
-.status-badge.gray {
+.status-bg.gray {
   background-color: #f3f4f6;
-  color: #6b7280;
+  color: #6e7688bd;
+  padding: 10px 16px;
 }
 
 .actions-cell {

@@ -119,10 +119,18 @@
 }
 
 .pagination {
+  padding: 1rem;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
   gap: 8px;
   margin-top: 20px;
+  max-width: 900px;
+  overflow-x: scroll;
+  margin: auto;
+
 }
 
 .page-button {

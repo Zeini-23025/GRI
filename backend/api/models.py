@@ -47,6 +47,9 @@ class Immobiliers(models.Model):
     montant = models.FloatField(default=0.0)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    
+
     id_type = models.ForeignKey(Types, on_delete=models.CASCADE)
     id_proprietaire = models.ForeignKey(Utilisateurs, on_delete=models.CASCADE)
 
@@ -56,7 +59,7 @@ class Immobiliers(models.Model):
 
 class Notifications(models.Model):
     id_utilisateur = models.ForeignKey(Utilisateurs, on_delete=models.CASCADE)
-    type = models.CharField(max_length=50)  # Ajout de max_length
+    type = models.CharField(max_length=255)  # Ajout de max_length
     message = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
 
@@ -93,6 +96,7 @@ class Paiements(models.Model):  # Renommé en PascalCase
     date_paiement = models.DateField(auto_now_add=True)
     methode_paiement = models.CharField(max_length=50)  # Ajout de max_length
     statut = models.CharField(max_length=50)  # Ajout de max_length
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self):
         return f"Paiement: {self.id_contrat}  {self.montant} MRU"
@@ -116,6 +120,7 @@ class Demandes(models.Model):
         default='En attente'
     )
     id_immobilier = models.ForeignKey(Immobiliers, on_delete=models.CASCADE)
+    id_user = models.ForeignKey(Utilisateurs, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Demande de {self.nom_complet} pour {self.id_immobilier.nom}"
