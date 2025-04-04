@@ -20,6 +20,7 @@ const Login = () => {
         password,
       });
 
+
       // Stocker les informations de l'utilisateur et les tokens
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
@@ -31,6 +32,7 @@ const Login = () => {
       if (response.data.role === 'provider' || response.data.is_superuser) {
         navigate('/dashboard');
       } else {
+        
         navigate('/');
       }
       

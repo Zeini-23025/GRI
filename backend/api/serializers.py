@@ -81,7 +81,7 @@ class TypesSerializer(serializers.ModelSerializer):
 class ImmobiliersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Immobiliers
-        fields = ('id', 'nom', 'adresse', 'superficie', 'montant', 'created_at', 'updated_at', 'id_type', 'id_proprietaire')
+        fields = ['id', 'nom', 'adresse', 'superficie', 'montant', 'image', 'created_at', 'updated_at', 'id_type', 'id_proprietaire']
         exra_kwargs = {}
 
     def to_representation(self, instance):

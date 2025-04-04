@@ -81,7 +81,7 @@ const Demandes = () => {
 
   const renderActions = (demande) => {
     // N'afficher les boutons que si la demande est en attente
-    if (demande.statut === 'En attente') {
+    if (demande.statut === 'en_attente') {
       const isProcessing = processingId === demande.id;
       return (
         <>
@@ -138,9 +138,9 @@ const Demandes = () => {
           className="status-filter"
         >
           <option value="all">Toutes les demandes</option>
-          <option value="En attente">En attente</option>
-          <option value="Acceptée">Acceptées</option>
-          <option value="Refusée">Refusées</option>
+          <option value="en_attente">En attente</option>
+          <option value="acceptee">Acceptées</option>
+          <option value="refusée">Refusées</option>
         </select>
       </div>
 

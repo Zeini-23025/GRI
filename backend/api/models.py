@@ -45,6 +45,7 @@ class Immobiliers(models.Model):
     adresse = models.CharField(max_length=255)
     superficie = models.FloatField()
     montant = models.FloatField(default=0.0)
+    image = models.ImageField(upload_to='immobiliers/', null=True, blank=True)  # Nouveau champ
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     id_type = models.ForeignKey(Types, on_delete=models.CASCADE)
