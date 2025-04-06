@@ -130,8 +130,9 @@ class ContratsSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         return {
             # 'data': {
+                'id': instance.id,
                 'id_immobilier': instance.id_immobilier.nom,
-                'id_locataire': instance.id_locataire.nom,
+                'id_locataire': instance.id_locataire.id,
                 'date_debut': instance.date_debut,
                 'date_fin': instance.date_fin,
                 'montant': instance.montant,
@@ -171,6 +172,7 @@ class PaiementsSerializer(serializers.ModelSerializer):
             # 'data': {
                 'id': instance.id,
                 'locataire': instance.id_contrat.id_locataire.nom + ' ' + str(instance.id_contrat.id_locataire.prenom),
+                'id_locataire': instance.id_contrat.id_locataire.id,
                 'mois': instance.id_mois.nom + ' ' + str(instance.id_mois.annee),
                 'montant': instance.montant,
                 'date_paiement': instance.date_paiement,

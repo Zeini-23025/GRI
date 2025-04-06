@@ -18,11 +18,11 @@ const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
   const [statsData, setStatsData] = useState({
     enAttente: 0,
-    // enRetard: 0,
+    enRetard: 0,
     confirmes: 0,
     annules: 0,
     evolutionAttente: 0,
-    // evolutionRetard: 0,
+    evolutionRetard: 0,
     evolutionConfirmes: 0,
     evolutionAnnules: 0
   });
@@ -40,7 +40,7 @@ const Transactions = () => {
       // Calculer les statistiques basées sur les données du sérialiseur
       const stats = {
         enAttente: paiements.filter(p => p.statut === 'En attente').length,
-        // enRetard: paiements.filter(p => p.statut === 'Retard').length,
+        enRetard: paiements.filter(p => p.statut === 'Retard').length,
         confirmes: paiements.filter(p => p.statut === 'Payé').length,
         annules: paiements.filter(p => p.statut === 'Annulé').length,
         evolutionAttente: (paiements.filter(p => p.statut === 'En attente').length/paiements.length*100 ).toFixed(2), // À calculer avec des données historiques
@@ -69,6 +69,25 @@ const Transactions = () => {
         statut: newStatus,
       
       });
+
+      if (newStatus === 'Payé') {
+        const newNotification = {
+          type: "Comfirmation du paiment",
+          message: `Votre paiment a pour le mois de ${transaction.id_mois} a ete confirmé`,
+          id_utilisateur: transaction.id_locataire,
+        };
+    
+        await handleNotificationClient(newNotification);
+      }else if (newStatus === 'Annulé') {
+        const newNotification = {
+          type: "Annulation du paiment",
+          message: `Votre paiment a pour le mois de ${transaction.id_mois} a ete annulé.
+          veuillez contacter l'administrateur pour plus de détails ou verifier votre paiement`,
+          id_utilisateur: transaction.id_locataire,
+        };
+        await handleNotificationClient(newNotification);
+      }
+
       fetchTransactions(); // Rafraîchir les données
     } catch (err) {
       console.error("Erreur lors de la mise à jour du statut:", err);
@@ -82,12 +101,38 @@ const Transactions = () => {
   const getStatusColor = (status) => {
     const colors = {
       'En attente': 'orange',
-      // 'Retard': 'red',
+      'Retard': 'red',
       'Payé': 'green',
       'Annulé': 'gray'
     };
     return colors[status] || 'gray';
   };
+
+  const handleNotificationClient = async (newNotification) => {
+      try {
+        // setProcessingId(newNotification);
+    
+        // Créer une nouvelle notification pour éviter la mutation directe
+        // const newNotification = {
+        //   type: "Comfirmation du paiment",
+        //   message: `Votre paiment a pour le mois de ${mois} a ete acceptée`,
+        //   id_utilisateur: user_id,
+        // };
+    
+        const response = await apiServices.Notifications.create(newNotification);
+    
+        if (response?.status === 201) {
+          alert("Notification envoyée avec succès !");
+        } else {
+          alert("Problème lors de l'envoi de la notification.");
+        }
+    
+      } catch (error) {
+        console.error(error);
+        alert("Erreur lors de l'envoi de la notification.");
+      }
+    };
+     
 
   if (loading) return <div className="loading">Chargement...</div>;
   if (error) return <div className="error">{error}</div>;
@@ -111,7 +156,7 @@ const Transactions = () => {
         >
           <option value="all">Tous les statuts</option>
           <option value="en attente">En attente</option>
-          {/* <option value="retard">En retard</option> */}
+          <option value="retard">En retard</option>
           <option value="payé">Confirmés</option>
           <option value="annulé">Annulés</option>
         </select>

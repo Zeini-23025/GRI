@@ -18,6 +18,7 @@ import RentForm from "../rent/RentForm";
 import FilteredProperties from "../home/featured/FilteredProperties";
 import UserProfilePage from "../UserProfile/UserProfile";
 import InboxPage from "../boit_reception/InboxPage";
+import PaimentForm from "../paiemnet/paimentForm";
 
 // Dashboard imports
 import DashboardLayout from "../../Dashboard/layouts/DashboardLayout";
@@ -40,6 +41,7 @@ import UtilisateurList from "../../Dashboard/components/Tables/UtilisateurList";
 // Forms imports
 import ImmobilierForm from "../../Dashboard/components/Forms/ImmobilierForm";
 import TypesForm from "../../Dashboard/components/Forms/typesForm";
+import ContratForm from "../../Dashboard/components/Forms/contraForm";
 
 
 const Pages = () => {
@@ -143,13 +145,15 @@ const Pages = () => {
             {/* Gestion des Tables Routes */}
             <Route path="gestion-des-tables">
               <Route path="contrat" element={<ContratList />} />
+              <Route path="contrat/create" element={<ContratForm />} />
+              <Route path="contrat/create/:id" element={<ContratForm />} />
               <Route path="paiement" element={<PaiementList />} />
               <Route path="types" element={<TypeList />} />
               <Route path="types/create" element={<TypesForm />} />
-              <Route path="types/edit/:id" element={<TypesForm />} />
+              <Route path="types/create/:id" element={<TypesForm />} />
               <Route path="immobiliers" element={<ImmobilierList />} />
               <Route path="immobilier/create" element={<ImmobilierForm />} />
-              <Route path="immobilier/edit/:id" element={<ImmobilierForm />} />
+              <Route path="immobilier/create/:id" element={<ImmobilierForm />} />
 
               <Route path="utilisateur" element={<UtilisateurList />} />
             </Route>
@@ -177,6 +181,7 @@ const Pages = () => {
           {/* <Route path="/rent-form/:id" element={<RentForm />} />
            */}
           <Route path="demandes/:id" element={<DemandForm immobilierId={3} />} />
+          <Route path="/formulaire-paiement" element={<PaimentForm />} />
 
 
         </Routes>

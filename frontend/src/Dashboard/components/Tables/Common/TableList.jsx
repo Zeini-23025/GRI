@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../../../../api';
+import api, { apiServices } from '../../../../api';
 import './TableList.css';
+
+
 
 const TableList = ({ 
   title, 
@@ -25,6 +27,7 @@ const TableList = ({
       try {
         setLoading(true);
         const response = await api.get(`/api/${endpoint}/`);
+        console.log(response.data);
         setData(response.data);
         setLoading(false);
       } catch (err) {
@@ -47,8 +50,28 @@ const TableList = ({
     page * itemsPerPage
   );
 
+  // handleEdit = (item) => {
+  // }
+
   if (loading) return <div className="loading">Chargement...</div>;
   if (error) return <div className="error">{error}</div>;
+
+
+const handleDelet = async (id) => {
+  try {
+    const response = await apiServices[endpoint].delete(id);
+    if (response.status === 204) {
+      setData(data.filter(item => item.id !== id));
+      alert("Suppression réussie");
+    } else {
+      alert("Erreur lors de la suppression");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Erreur lors de la suppression");
+  }
+}
+  
 
   return (
     <div className="table-page">
@@ -95,6 +118,21 @@ const TableList = ({
                     >
                       Voir
                     </Link>
+                    {(title !== "Paiements" )  && (
+
+                    <Link to={`${createPath}/${item.id}`} className="create-button">
+                      <span className="edit-btn"></span>
+                      {title}
+                    </Link>
+
+                    ) && (
+                      <button 
+                      className="action-btn reject"
+                      onClick={() => handleDelet(item.id)}
+                      title="suprimer"
+                    >
+                    </button>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -117,6 +155,7 @@ const TableList = ({
             >
               {i + 1}
             </button>
+            
           ))}
         </div>
       </div>
@@ -124,4 +163,4 @@ const TableList = ({
   );
 };
 
-export default TableList; 
+export default TableList;

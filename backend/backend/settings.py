@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'api',
     'corsheaders',
+    'django_celery_beat',
 ]
 
 REST_FRAMEWORK = {
@@ -168,3 +169,31 @@ SIMPLE_JWT = {
 # CELERY_ACCEPT_CONTENT = ['json']
 # CELERY_TASK_SERIALIZER = 'json'
 
+# Pour les tests seulement
+CELERY_TASK_ALWAYS_EAGER = True  # Exécute les tâches immédiatement sans broker
+CELERY_TASK_EAGER_PROPAGATES = True  # Propage les exceptions
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Notez le /0 pour la base de données
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'  # Différente base pour les résultats
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+# CELERY_BROKER_URL = 'redis://:127.0.0.1:6379/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {
+    'visibility_timeout': 3600,
+    'socket_connect_timeout': 5,
+    'retry_on_timeout': True
+}
+
+
+CELERY_TIMEZONE = 'UTC'
+
+
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    'verifier-paiements-retard': {
+        'task': 'api.tasks.task_verifier_paiements_retard',
+        'schedule': crontab(hour=7, minute=30),  # Tous les jours à 9h
+        'options': {'queue': 'periodic'}
+    },
+}

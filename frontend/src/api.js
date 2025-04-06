@@ -92,18 +92,18 @@ const apiServices = {
   // Utilisateurs
   utilisateurs: {
     list: () => api.get('/api/users/'),
-    get: (id) => api.get(`/api/utilisateurs/${id}/`),
+    get: (id) => api.get(`/api/users/${id}/`),
     update: (id, data) => api.put(`/api/user/${id}/`, data),
   },
 
   // Demandes
   demandes: {
     list: () => api.get('/api/demandes/'),
-    create: (data) => api.post('/api/demandes/create/', data),
+    create: (data) => api.post('/api/demandes/', data),
     update: (id, data) => api.put(`/api/demandes/${id}/update/`, data),
     get: (id) => api.get(`/api/demandes/${id}/`),
-    accepter: (id) => api.put(`/api/demandes/${id}/accepter/`),
-    refuser: (id) => api.put(`/api/demandes/${id}/refuser/`),
+    accepter: (id) => api.patch(`/api/demandes/${id}/accepter/`),
+    refuser: (id) => api.patch(`/api/demandes/${id}/refuser/`),
   },
 
   Notifications: {

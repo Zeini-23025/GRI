@@ -37,14 +37,9 @@ function Sidebar({ isOpen, setIsOpen }) {
       icon: faMoneyBillTransfer, 
       text: 'Transactions', 
       path: '/dashboard/transactions',
-      // subItems: [
-      //   { text: 'Recent', path: '/dashboard/transactions' },
-      //   { text: 'History', path: '/dashboard/transactions/history' }
-      // ]
     },
     { icon: faCog, text: 'Demandes', path: '/dashboard/demandes' },
     { icon: faFileInvoiceDollar, text: 'Revenue', path: '/dashboard/revenues' },
-    { icon: faCog, text: 'Retad', path: '/dashboard/retard' },
     { icon: faChartArea, text: 'Statistique', path: '/dashboard/statistique' },
     { 
       icon: faTableCells,

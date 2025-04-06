@@ -1,11 +1,11 @@
 from rest_framework.views import APIView
 # from rest_framework.response import Response
-# from rest_framework import status,generics,viewsets,decorators
+from rest_framework import status,generics,viewsets,decorators
 from rest_framework.permissions import *
 # from rest_framework_simplejwt.tokens import RefreshToken
-# from .models import *
+from .models import *
 # from django.contrib.auth.models import User 
-# from .serializers import *
+from .serializers import *
 # from rest_framework import status
 
 
@@ -284,67 +284,67 @@ class LoginView(APIView):
 #     permission_classes = [AllowAny]
 #     lookup_field = 'id'
 
-# class AccepterDemandeView(generics.UpdateAPIView):
+class AccepterDemandeView(generics.UpdateAPIView):
    
-#     queryset = Demandes.objects.all()
-#     serializer_class = DemandesSerializer
-#     permission_classes = [AllowAny]
-#     lookup_field = 'id'
+    queryset = Demandes.objects.all()
+    serializer_class = DemandesSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
 
-#     def update(self, request, *args, **kwargs):
-#         instance = self.get_object()
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
         
-#         # Vérifier si la demande n'est pas déjà traitée
-#         if instance.statut != 'en_attente':
-#             return Response(
-#                 {"error": "Cette demande a déjà été traitée"},
-#                 status=status.HTTP_400_BAD_REQUEST
-#             )
+        # Vérifier si la demande n'est pas déjà traitée
+        if instance.statut != 'en_attente':
+            return Response(
+                {"error": "Cette demande a déjà été traitée"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-#         # Mettre à jour le statut
-#         instance.statut = 'Acceptée'
-#         instance.save()
+        # Mettre à jour le statut
+        instance.statut = 'Acceptée'
+        instance.save()
 
-#         serializer = self.get_serializer(instance)
-#         return Response(
-#             {
-#                 "message": "Demande acceptée avec succès",
-#                 "demande": serializer.data
-#             },
-#             status=status.HTTP_200_OK
-#         )
+        serializer = self.get_serializer(instance)
+        return Response(
+            {
+                "message": "Demande acceptée avec succès",
+                "demande": serializer.data
+            },
+            status=status.HTTP_200_OK
+        )
 
-# class RefuserDemandeView(generics.UpdateAPIView):
-#     """
-#     Vue pour refuser une demande de location
-#     """
-#     queryset = Demandes.objects.all()
-#     serializer_class = DemandesSerializer
-#     permission_classes = [AllowAny]
-#     lookup_field = 'id'
+class RefuserDemandeView(generics.UpdateAPIView):
+    """
+    Vue pour refuser une demande de location
+    """
+    queryset = Demandes.objects.all()
+    serializer_class = DemandesSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
 
-#     def update(self, request, *args, **kwargs):
-#         instance = self.get_object()
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
         
-#         # Vérifier si la demande n'est pas déjà traitée
-#         if instance.statut != 'en_attente':
-#             return Response(
-#                 {"error": "Cette demande a déjà été traitée"},
-#                 status=status.HTTP_400_BAD_REQUEST
-#             )
+        # Vérifier si la demande n'est pas déjà traitée
+        if instance.statut != 'en_attente':
+            return Response(
+                {"error": "Cette demande a déjà été traitée"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-#         # Mettre à jour le statut
-#         instance.statut = 'Refusée'
-#         instance.save()
+        # Mettre à jour le statut
+        instance.statut = 'Refusée'
+        instance.save()
 
-#         serializer = self.get_serializer(instance)
-#         return Response(
-#             {
-#                 "message": "Demande refusée avec succès",
-#                 "demande": serializer.data
-#             },
-#             status=status.HTTP_200_OK
-#         )
+        serializer = self.get_serializer(instance)
+        return Response(
+            {
+                "message": "Demande refusée avec succès",
+                "demande": serializer.data
+            },
+            status=status.HTTP_200_OK
+        )
 
 # class NotificationViewSet(viewsets.ModelViewSet):
 #     queryset = Notifications.objects.all()
@@ -406,7 +406,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Utilisateurs, Immobiliers, Types, Contrats, Paiements, Demandes, Notifications
 from .serializers import UserSerializer, ImmobiliersSerializer, TypesSerializer, ContratsSerializer, PaiementsSerializer, DemandesSerializer, NotificationsSerializer
 from django.contrib.auth.models import User
-from .tasks import verifier_paiements_retard
+# from .tasks import verifier_paiements_retard
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -425,8 +425,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @decorators.action(detail=False, methods=['post'], url_path='login')
     def login(self, request):
-        verifier_paiements_retard()
-        print("fait")
+        # verifier_paiements_retard()
+        # print("fait")
         email = request.data.get('email')
         password = request.data.get('password')
         try:

@@ -133,6 +133,15 @@
 
 }
 
+.action-btn {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
 .page-button {
   padding: 6px 12px;
   border: 1px solid #e5e7eb;

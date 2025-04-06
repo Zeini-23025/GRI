@@ -52,18 +52,32 @@ const Demandes = () => {
   //     setProcessingId(null);
   //   }
   // }
-
-
   const handleNotificationClient = async (user_id) => {
     try {
-      
+      setProcessingId(user_id);
+  
+      // Créer une nouvelle notification pour éviter la mutation directe
+      const newNotification = {
+        type: "acceptation",
+        message: "Votre demande a ete acceptée",
+        id_utilisateur: user_id,
+      };
+  
+      const response = await apiServices.Notifications.create(newNotification);
+  
+      if (response?.status === 201) {
+        alert("Notification envoyée avec succès !");
+      } else {
+        alert("Problème lors de l'envoi de la notification.");
+      }
+  
     } catch (error) {
-      console.log(error)
-      alert("Erreur lors de l'envoi de la notification")
-      
+      console.error(error);
+      alert("Erreur lors de l'envoi de la notification.");
     }
+  };
+   
 
-  }
   const handleAccepter = async (demande) => {
     try {
       setProcessingId(demande.id);
@@ -74,6 +88,7 @@ const Demandes = () => {
         alert(response.data.message || "Demande acceptée avec succès");
         const client =  await apiServices.utilisateurs.get(parseInt(demande.id_user));
         console.log(client) 
+        handleNotificationClient(client.data.id)
         // const immobilier = await apiServices.immobiliers.get(parseInt(demande.immobilier.id));
         // console.log("immobilier", immobilier.data);
       }

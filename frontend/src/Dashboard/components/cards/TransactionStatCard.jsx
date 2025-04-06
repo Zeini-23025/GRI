@@ -16,13 +16,13 @@ const TransactionStatCard = ({ data }) => {
       icon: faHourglassHalf,
       color: "orange"
     },
-    // {
-    //   title: "En Retard",
-    //   value: data.enRetard,
-    //   trend: `${data.evolutionRetard}% des transactions`,
-    //   icon: faExclamationTriangle,
-    //   color: "red"
-    // },
+    {
+      title: "En Retard",
+      value: data.enRetard,
+      trend: `${data.evolutionRetard}% des transactions`,
+      icon: faExclamationTriangle,
+      color: "red"
+    },
     {
       title: "Confirmés",
       value: data.confirmes,

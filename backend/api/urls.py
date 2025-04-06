@@ -63,4 +63,6 @@ router.register(r'notifications', NotificationViewSet, basename='notifications')
 
 urlpatterns = [path('', include(router.urls)),
               path('login/', LoginView.as_view(), name='login'),
+                path('demandes/<int:id>/accepter/', AccepterDemandeView.as_view(), name='accepter-demande'),
+                path('demandes/<int:id>/refuser/', RefuserDemandeView.as_view(), name='refuser-demande'),
 ]
