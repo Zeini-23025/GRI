@@ -14,7 +14,7 @@ import {
 
 } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import { useLogout } from '../../components/common/header/logout';
+import { useLogout } from '../../components/common/header/Logout';
 
 import './Sidebar.css'; 
 
