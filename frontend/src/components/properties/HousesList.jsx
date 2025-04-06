@@ -14,7 +14,8 @@ const HousesList = () => {
       try {
         const response = await apiServices.immobiliers.list();
         // Filtrer pour n'obtenir que les maisons
-        const housesList = response.data.filter(item => item.id_type.nom === 'Maison');
+        const housesList = response.data.filter(item => item.type === 'Maison');
+        console.log('response', housesList);
         setHouses(housesList);
       } catch (error) {
         console.error('Erreur lors du chargement des maisons:', error);

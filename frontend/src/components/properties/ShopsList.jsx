@@ -14,7 +14,8 @@ const ShopsList = () => {
       try {
         const response = await apiServices.immobiliers.list();
         // Filtrer pour n'obtenir que les boutiques
-        const shopsList = response.data.filter(item => item.id_type.nom === 'Boutique');
+        const shopsList = response.data.filter(item => item.type === 'boutique');
+        console.log('response', shopsList);
         setShops(shopsList);
       } catch (error) {
         console.error('Erreur lors du chargement des boutiques:', error);
