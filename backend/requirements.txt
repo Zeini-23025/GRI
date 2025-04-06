@@ -10,3 +10,7 @@ psycopg2-binary
 python-dotenv
 pytest-django
 gunicorn
+celery
+django-celery-beat
+redis
+Pillow

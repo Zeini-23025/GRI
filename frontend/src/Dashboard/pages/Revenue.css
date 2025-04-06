@@ -1,4 +1,4 @@
-.revenue-page {
+/* .revenue-page {
   padding: 2rem;
 }
 
@@ -60,4 +60,255 @@
     align-items: flex-start;
     gap: 1rem;
   }
-} 
+}  */
+.month-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1.5rem 0;
+}
+
+.month-navigation button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #4B5563;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+}
+
+.month-navigation button:hover {
+  background: #f3f4f6;
+}
+
+.month-navigation h2 {
+  margin: 0;
+  color: #111827;
+  min-width: 200px;
+  text-align: center;
+}
+
+.variation-positive {
+  color: #10B981;
+}
+
+.variation-negative {
+  color: #EF4444;
+}
+
+.variation-neutral {
+  color: #6B7280;
+}
+
+/* 
+.stat-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.main-card {
+  padding: 2rem;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #111827;
+  margin: 0.5rem 0;
+}
+
+.stat-secondary-value {
+  color: #6B7280;
+  font-size: 0.9rem;
+}
+
+.stat-comparison {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #4B5563;
+} */
+
+/* Style global */
+/* .stat-card {
+  background-color: #ffffff;
+  color: #0f0f0f;
+  border: 1px solid #e0e0e0;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000000;
+}
+
+.stat-secondary-value {
+  font-size: 1rem;
+  color: #666666;
+  margin-top: 0.25rem;
+}
+
+.stat-comparison {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.variation-positive {
+  color: #2196f3; 
+  font-weight: 600;
+}
+
+.variation-negative {
+  color: #ff4d4d;
+  font-weight: 600;
+}
+
+.variation-neutral {
+  color: #999999;
+  font-weight: 600;
+}
+
+.main-card {
+  background-color: #f7f9fc;
+  border: 2px solid #2196f3;
+} */
+
+/* Style uniforme pour toutes les cartes */
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #4f46e5; /* Bordure gauche bleue pour toutes les cartes */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0 0 12px 0;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 8px 0;
+}
+
+.stat-secondary-value {
+  font-size: 14px;
+  color: #64748b;
+  margin: 4px 0;
+}
+
+.stat-comparison {
+  margin-top: auto;
+  padding-top: 12px;
+  font-size: 12px;
+  color: #64748b;
+  border-top: 1px solid #f1f5f9;
+}
+
+.variation-positive {
+  color: #10b981;
+  font-weight: 500;
+}
+
+.variation-negative {
+  color: #ef4444;
+  font-weight: 500;
+}
+
+/* Disposition des cartes */
+.revenue-cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* Taille originale des graphiques */
+.revenue-charts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  /* Retour à la taille originale */
+  height: 450px; 
+}
+
+.chart-card h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0 0 16px 0;
+}
+
+/* Navigation (inchangé) */
+.month-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 20px 0;
+}
+
+.month-navigation button {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  font-size: 14px;
+  color: #64748b;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.month-navigation button:hover {
+  background: #f1f5f9;
+}
+
+.month-navigation h2 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+  min-width: 200px;
+  text-align: center;
+}

@@ -5,8 +5,10 @@ import conditions from "../../data/conditions.json";
 import "./demandForm.css";
 
 const DemandForm = ({ immobilierId }) => {
+    
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
+        id :  localStorage.getItem('id'),
         nom_complet: "",
         email: "",
         telephone: "",
@@ -79,7 +81,7 @@ const DemandForm = ({ immobilierId }) => {
         // Initialiser formData avec les champs vides et l'ID de l'immobilier
         const initialData = {
             statut: "En attente",
-            id_immobilier: immobilierId
+            id_immobilier: immobilierId,
         };
         fields.forEach(field => {
             initialData[field.field] = '';
@@ -148,8 +150,9 @@ const DemandForm = ({ immobilierId }) => {
                 date_debut: new Date(formData.date_debut).toISOString().split('T')[0],
                 duree: parseInt(formData.duree),
                 message: formData.message || "",
+                statut: "en_attente",
                 id_immobilier: parseInt(immobilierId),
-                statut: "en_attente"
+                id_user: parseInt(localStorage.getItem('id'))
             };
 
             console.log('Données envoyées:', formattedData); // Pour le débogage

@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-dqj5zx+z0&&83gdk1e0w*ufa1zioe6(^xq^5zhf$_(vbefo$4z
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.100.14', 
+    # '172.20.10.2',
     'localhost', 
     '127.0.0.1',
     ]
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'api',
     'corsheaders',
+    'django_celery_beat',
 ]
 
 REST_FRAMEWORK = {
@@ -75,7 +76,7 @@ AUTH_USER_MODEL = 'api.Utilisateurs'
 # Autoriser les requêtes provenant de votre frontend
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
-      'http://192.168.100.14:5173',  # URL de votre application Vite
+    #   'http://192.168.100.14:5173',  # URL de votre application Vite
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'backend.urls'
@@ -158,4 +159,41 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,
+}
+
+
+#################### tahes automatisées #######################
+# import os
+
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Utilisation de Redis comme broker
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+
+# Pour les tests seulement
+CELERY_TASK_ALWAYS_EAGER = True  # Exécute les tâches immédiatement sans broker
+CELERY_TASK_EAGER_PROPAGATES = True  # Propage les exceptions
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Notez le /0 pour la base de données
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/1'  # Différente base pour les résultats
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+# CELERY_BROKER_URL = 'redis://:127.0.0.1:6379/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {
+    'visibility_timeout': 3600,
+    'socket_connect_timeout': 5,
+    'retry_on_timeout': True
+}
+
+
+CELERY_TIMEZONE = 'UTC'
+
+
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    'verifier-paiements-retard': {
+        'task': 'api.tasks.task_verifier_paiements_retard',
+        'schedule': crontab(hour=7, minute=30),  # Tous les jours à 9h
+        'options': {'queue': 'periodic'}
+    },
 }

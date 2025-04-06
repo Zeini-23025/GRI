@@ -53,7 +53,7 @@ const ImmobilierForm = () => {
   return (
     <Form 
       fields={fields}
-      endpoint="immobilier"
+      endpoint="immobiliers"
       id={id}
       title="un immobilier"
     />

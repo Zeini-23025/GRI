@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./header.css";
 import { nav } from "../../data/Data"; // Assurez-vous que cette liste ne contient pas Login/Signup
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useLogout } from "./logout";
+import { useLogout } from "./Logout";
 
 const Header = () => {
   const [navList, setNavList] = useState(false);

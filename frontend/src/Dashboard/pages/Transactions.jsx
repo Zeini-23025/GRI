@@ -43,10 +43,10 @@ const Transactions = () => {
         enRetard: paiements.filter(p => p.statut === 'Retard').length,
         confirmes: paiements.filter(p => p.statut === 'Payé').length,
         annules: paiements.filter(p => p.statut === 'Annulé').length,
-        evolutionAttente: 5, // À calculer avec des données historiques
-        evolutionRetard: 2,
-        evolutionConfirmes: 8,
-        evolutionAnnules: -3
+        evolutionAttente: (paiements.filter(p => p.statut === 'En attente').length/paiements.length*100 ).toFixed(2), // À calculer avec des données historiques
+        evolutionRetard: (paiements.filter(p => p.statut === 'Retard').length/paiements.length*100).toFixed(2),
+        evolutionConfirmes: (paiements.filter(p => p.statut === 'Payé').length/paiements.length*100).toFixed(2),
+        evolutionAnnules: (paiements.filter(p => p.statut === 'Annulé').length/paiements.length*100).toFixed(2)
       };
 
       setStatsData(stats);
@@ -69,6 +69,25 @@ const Transactions = () => {
         statut: newStatus,
       
       });
+
+      if (newStatus === 'Payé') {
+        const newNotification = {
+          type: "Comfirmation du paiment",
+          message: `Votre paiment a pour le mois de ${transaction.id_mois} a ete confirmé`,
+          id_utilisateur: transaction.id_locataire,
+        };
+    
+        await handleNotificationClient(newNotification);
+      }else if (newStatus === 'Annulé') {
+        const newNotification = {
+          type: "Annulation du paiment",
+          message: `Votre paiment a pour le mois de ${transaction.id_mois} a ete annulé.
+          veuillez contacter l'administrateur pour plus de détails ou verifier votre paiement`,
+          id_utilisateur: transaction.id_locataire,
+        };
+        await handleNotificationClient(newNotification);
+      }
+
       fetchTransactions(); // Rafraîchir les données
     } catch (err) {
       console.error("Erreur lors de la mise à jour du statut:", err);
@@ -89,6 +108,32 @@ const Transactions = () => {
     return colors[status] || 'gray';
   };
 
+  const handleNotificationClient = async (newNotification) => {
+      try {
+        // setProcessingId(newNotification);
+    
+        // Créer une nouvelle notification pour éviter la mutation directe
+        // const newNotification = {
+        //   type: "Comfirmation du paiment",
+        //   message: `Votre paiment a pour le mois de ${mois} a ete acceptée`,
+        //   id_utilisateur: user_id,
+        // };
+    
+        const response = await apiServices.Notifications.create(newNotification);
+    
+        if (response?.status === 201) {
+          alert("Notification envoyée avec succès !");
+        } else {
+          alert("Problème lors de l'envoi de la notification.");
+        }
+    
+      } catch (error) {
+        console.error(error);
+        alert("Erreur lors de l'envoi de la notification.");
+      }
+    };
+     
+
   if (loading) return <div className="loading">Chargement...</div>;
   if (error) return <div className="error">{error}</div>;
 
@@ -97,12 +142,8 @@ const Transactions = () => {
       <div className="transactions-header">
         <div>
           <h1>Transactions</h1>
-          <p>Gestion des paiements en attente et en retard</p>
+          <p>Gestion des paiements </p>
         </div>
-        <button className="export-btn">
-          <FontAwesomeIcon icon={faDownload} />
-          Exporter
-        </button>
       </div>
 
       <TransactionStatCard data={statsData} />
@@ -143,12 +184,12 @@ const Transactions = () => {
                 <td>{new Date(transaction.date_paiement).toLocaleDateString()}</td>
                 <td>{transaction.methode_paiement}</td>
                 <td>
-                  <span className={`status-badge ${getStatusColor(transaction.statut)}`}>
+                  <span className={`status-bg  ${getStatusColor(transaction.statut)}`}>
                     {transaction.statut}
                   </span>
                 </td>
                 <td className="actions-cell">
-                  {transaction.statut !== 'Payé' && (
+                  {transaction.statut == 'En attente' && (
                     <button 
                       className="action-btn confirm"
                       onClick={() => handleStatusChange(transaction.id, 'Payé', transaction)}
@@ -157,7 +198,7 @@ const Transactions = () => {
                       <FontAwesomeIcon icon={faCheck} />
                     </button>
                   )}
-                  {transaction.statut !== 'Annulé' && (
+                  {transaction.statut == 'En attente' && (
                     <button 
                       className="action-btn cancel"
                       onClick={() => handleStatusChange(transaction.id, 'Annulé', transaction)}

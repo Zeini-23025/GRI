@@ -18,7 +18,7 @@ const NotificationBox = () => {
 
     const loadNotifications = async () => {
         try {
-            const response = await apiServices.notifications.list();
+            const response = await apiServices.Notifications.list();
             setNotifications(response.data);
             const unread = response.data.filter(notif => !notif.lu).length;
             setUnreadCount(unread);
@@ -30,7 +30,7 @@ const NotificationBox = () => {
     const handleNotificationClick = async (notification) => {
         try {
             if (!notification.lu) {
-                await apiServices.notifications.markAsRead(notification.id);
+                await apiServices.Notifications.markAsRead(notification.id);
                 loadNotifications();
             }
             

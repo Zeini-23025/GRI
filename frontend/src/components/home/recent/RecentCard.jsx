@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { list } from "../../data/Data"
 import { useNavigate } from "react-router-dom"
-import "./recent.css"
+import "./Recent.css"
 
 const RecentCard = () => {
   const navigate = useNavigate();

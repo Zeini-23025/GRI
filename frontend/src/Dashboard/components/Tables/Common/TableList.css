@@ -119,10 +119,27 @@
 }
 
 .pagination {
+  padding: 1rem;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
   gap: 8px;
   margin-top: 20px;
+  max-width: 900px;
+  overflow-x: scroll;
+  margin: auto;
+
+}
+
+.action-btn {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .page-button {

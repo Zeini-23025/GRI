@@ -113,7 +113,7 @@ class NotificationsSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         return {
             # 'data': {
-                'id_utilisateur': instance.id_utilisateur.nom,
+                'id_utilisateur': instance.id_utilisateur.id,
                 'type': instance.type,  
                 'message': instance.message,
                 'date': instance.date,
@@ -130,8 +130,9 @@ class ContratsSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         return {
             # 'data': {
+                'id': instance.id,
                 'id_immobilier': instance.id_immobilier.nom,
-                'id_locataire': instance.id_locataire.nom,
+                'id_locataire': instance.id_locataire.id,
                 'date_debut': instance.date_debut,
                 'date_fin': instance.date_fin,
                 'montant': instance.montant,
@@ -171,6 +172,7 @@ class PaiementsSerializer(serializers.ModelSerializer):
             # 'data': {
                 'id': instance.id,
                 'locataire': instance.id_contrat.id_locataire.nom + ' ' + str(instance.id_contrat.id_locataire.prenom),
+                'id_locataire': instance.id_contrat.id_locataire.id,
                 'mois': instance.id_mois.nom + ' ' + str(instance.id_mois.annee),
                 'montant': instance.montant,
                 'date_paiement': instance.date_paiement,
@@ -211,8 +213,10 @@ class DemandesSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
+        print('User-id : ', instance.id_user.id)
         return {
             'id': instance.id,
+            'id_user': instance.id_user.id,
             'nom_complet': instance.nom_complet,
             'email': instance.email,
             'telephone': instance.telephone,
@@ -221,5 +225,9 @@ class DemandesSerializer(serializers.ModelSerializer):
             'message': instance.message,
             'date_demande': instance.date_demande,
             'statut': instance.statut,
-            'immobilier': instance.id_immobilier.nom
+            'immobilier': {
+                'id': instance.id_immobilier.id,
+                'nom': instance.id_immobilier.nom,
+
+            }
         }

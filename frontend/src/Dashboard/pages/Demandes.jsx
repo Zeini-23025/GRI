@@ -36,14 +36,61 @@ const Demandes = () => {
     fetchDemandes();
   }, []);
 
-  const handleAccepter = async (demandeId) => {
+  // const handleInformerClien = async (demande) => {
+  //   try {
+  //     setProcessingId(demande.id);
+  //     const response = await apiServices.demandes.informerClient(demande.id);
+      
+  //     if (response.data) {
+  //       // await fetchDemandes();
+  //       alert(response.data.message || "Client informé avec succès");
+  //     }
+  //   } catch (err) {
+  //     console.error("Erreur lors de l'information du client:", err);
+  //     alert(err.response?.data?.error || "Erreur lors de l'information du client");
+  //   } finally {
+  //     setProcessingId(null);
+  //   }
+  // }
+  const handleNotificationClient = async (user_id) => {
     try {
-      setProcessingId(demandeId);
-      const response = await apiServices.demandes.accepter(demandeId);
+      setProcessingId(user_id);
+  
+      // Créer une nouvelle notification pour éviter la mutation directe
+      const newNotification = {
+        type: "acceptation",
+        message: "Votre demande a ete acceptée",
+        id_utilisateur: user_id,
+      };
+  
+      const response = await apiServices.Notifications.create(newNotification);
+  
+      if (response?.status === 201) {
+        alert("Notification envoyée avec succès !");
+      } else {
+        alert("Problème lors de l'envoi de la notification.");
+      }
+  
+    } catch (error) {
+      console.error(error);
+      alert("Erreur lors de l'envoi de la notification.");
+    }
+  };
+   
+
+  const handleAccepter = async (demande) => {
+    try {
+      setProcessingId(demande.id);
+      const response = await apiServices.demandes.accepter(demande.id);
       
       if (response.data) {
         await fetchDemandes();
         alert(response.data.message || "Demande acceptée avec succès");
+        const client =  await apiServices.utilisateurs.get(parseInt(demande.id_user));
+        console.log(client) 
+        handleNotificationClient(client.data.id)
+        // const immobilier = await apiServices.immobiliers.get(parseInt(demande.immobilier.id));
+        // console.log("immobilier", immobilier.data);
       }
     } catch (err) {
       console.error("Erreur lors de l'acceptation de la demande:", err);
@@ -81,13 +128,13 @@ const Demandes = () => {
 
   const renderActions = (demande) => {
     // N'afficher les boutons que si la demande est en attente
-    if (demande.statut === 'En attente') {
+    if (demande.statut === 'en_attente') {
       const isProcessing = processingId === demande.id;
       return (
         <>
           <button 
             className="action-btn accept"
-            onClick={() => handleAccepter(demande.id)}
+            onClick={() => handleAccepter(demande)}
             title="Acceptée"
             disabled={isProcessing}
           >
@@ -138,7 +185,7 @@ const Demandes = () => {
           className="status-filter"
         >
           <option value="all">Toutes les demandes</option>
-          <option value="En attente">En attente</option>
+          <option value="en_attente">En attente</option>
           <option value="Acceptée">Acceptées</option>
           <option value="Refusée">Refusées</option>
         </select>
@@ -172,11 +219,11 @@ const Demandes = () => {
                   <td>{demande.nom_complet}</td>
                   <td>{demande.email}</td>
                   <td>{demande.telephone}</td>
-                  <td>{demande.immobilier}</td>
+                  <td>{demande.immobilier.nom}</td>
                   <td>{new Date(demande.date_debut).toLocaleDateString()}</td>
                   <td>{demande.duree}</td>
                   <td>
-                    <span className={`status-badge ${demande.statut}`}>
+                    <span className={ `status-bg  ${demande.statut}`}>
                       {demande.statut.replace('_', ' ')}
                     </span>
                   </td>

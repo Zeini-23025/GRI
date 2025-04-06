@@ -21,8 +21,8 @@ const Form = ({ fields, actions, endpoint, id, title }) => {
     if (id) {
       const fetchData = async () => {
         try {
-          const response = await apiServices[endpoint].get(id);
-          setFormData(response.data.data[endpoint.slice(0, -1)]);
+          const response = await apiServices[endpoint].get(`${id}`);
+          setFormData(response.data);
         } catch (err) {
           setError(`Erreur lors du chargement des données`);
         }
