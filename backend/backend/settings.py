@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-dqj5zx+z0&&83gdk1e0w*ufa1zioe6(^xq^5zhf$_(vbefo$4z
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.100.14', 
+    # '172.20.10.2',
     'localhost', 
     '127.0.0.1',
     ]
@@ -81,7 +81,7 @@ AUTH_USER_MODEL = 'api.Utilisateurs'
 # Autoriser les requêtes provenant de votre frontend
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
-      'http://192.168.100.14:5173',  # URL de votre application Vite
+    #   'http://192.168.100.14:5173',  # URL de votre application Vite
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'backend.urls'
@@ -165,3 +165,12 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': False,
 }
+
+
+#################### tahes automatisées #######################
+# import os
+
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'  # Utilisation de Redis comme broker
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+

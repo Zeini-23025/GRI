@@ -18,11 +18,11 @@ const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
   const [statsData, setStatsData] = useState({
     enAttente: 0,
-    enRetard: 0,
+    // enRetard: 0,
     confirmes: 0,
     annules: 0,
     evolutionAttente: 0,
-    evolutionRetard: 0,
+    // evolutionRetard: 0,
     evolutionConfirmes: 0,
     evolutionAnnules: 0
   });
@@ -40,13 +40,13 @@ const Transactions = () => {
       // Calculer les statistiques basées sur les données du sérialiseur
       const stats = {
         enAttente: paiements.filter(p => p.statut === 'En attente').length,
-        enRetard: paiements.filter(p => p.statut === 'Retard').length,
+        // enRetard: paiements.filter(p => p.statut === 'Retard').length,
         confirmes: paiements.filter(p => p.statut === 'Payé').length,
         annules: paiements.filter(p => p.statut === 'Annulé').length,
-        evolutionAttente: 5, // À calculer avec des données historiques
-        evolutionRetard: 2,
-        evolutionConfirmes: 8,
-        evolutionAnnules: -3
+        evolutionAttente: (paiements.filter(p => p.statut === 'En attente').length/paiements.length*100 ).toFixed(2), // À calculer avec des données historiques
+        evolutionRetard: (paiements.filter(p => p.statut === 'Retard').length/paiements.length*100).toFixed(2),
+        evolutionConfirmes: (paiements.filter(p => p.statut === 'Payé').length/paiements.length*100).toFixed(2),
+        evolutionAnnules: (paiements.filter(p => p.statut === 'Annulé').length/paiements.length*100).toFixed(2)
       };
 
       setStatsData(stats);
@@ -82,7 +82,7 @@ const Transactions = () => {
   const getStatusColor = (status) => {
     const colors = {
       'En attente': 'orange',
-      'Retard': 'red',
+      // 'Retard': 'red',
       'Payé': 'green',
       'Annulé': 'gray'
     };
@@ -97,12 +97,8 @@ const Transactions = () => {
       <div className="transactions-header">
         <div>
           <h1>Transactions</h1>
-          <p>Gestion des paiements en attente et en retard</p>
+          <p>Gestion des paiements </p>
         </div>
-        <button className="export-btn">
-          <FontAwesomeIcon icon={faDownload} />
-          Exporter
-        </button>
       </div>
 
       <TransactionStatCard data={statsData} />
@@ -115,7 +111,7 @@ const Transactions = () => {
         >
           <option value="all">Tous les statuts</option>
           <option value="en attente">En attente</option>
-          <option value="retard">En retard</option>
+          {/* <option value="retard">En retard</option> */}
           <option value="payé">Confirmés</option>
           <option value="annulé">Annulés</option>
         </select>
@@ -143,12 +139,12 @@ const Transactions = () => {
                 <td>{new Date(transaction.date_paiement).toLocaleDateString()}</td>
                 <td>{transaction.methode_paiement}</td>
                 <td>
-                  <span className={`status-badge ${getStatusColor(transaction.statut)}`}>
+                  <span className={`status-bg  ${getStatusColor(transaction.statut)}`}>
                     {transaction.statut}
                   </span>
                 </td>
                 <td className="actions-cell">
-                  {transaction.statut !== 'Payé' && (
+                  {transaction.statut == 'En attente' && (
                     <button 
                       className="action-btn confirm"
                       onClick={() => handleStatusChange(transaction.id, 'Payé', transaction)}
@@ -157,7 +153,7 @@ const Transactions = () => {
                       <FontAwesomeIcon icon={faCheck} />
                     </button>
                   )}
-                  {transaction.statut !== 'Annulé' && (
+                  {transaction.statut == 'En attente' && (
                     <button 
                       className="action-btn cancel"
                       onClick={() => handleStatusChange(transaction.id, 'Annulé', transaction)}

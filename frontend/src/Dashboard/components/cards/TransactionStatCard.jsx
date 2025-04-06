@@ -12,28 +12,28 @@ const TransactionStatCard = ({ data }) => {
     {
       title: "En Attente",
       value: data.enAttente,
-      trend: `${data.evolutionAttente}% ce mois`,
+      trend: `${data.evolutionAttente}% des transactions`,
       icon: faHourglassHalf,
       color: "orange"
     },
-    {
-      title: "En Retard",
-      value: data.enRetard,
-      trend: `${data.evolutionRetard}% ce mois`,
-      icon: faExclamationTriangle,
-      color: "red"
-    },
+    // {
+    //   title: "En Retard",
+    //   value: data.enRetard,
+    //   trend: `${data.evolutionRetard}% des transactions`,
+    //   icon: faExclamationTriangle,
+    //   color: "red"
+    // },
     {
       title: "Confirmés",
       value: data.confirmes,
-      trend: `${data.evolutionConfirmes}% ce mois`,
+      trend: `${data.evolutionConfirmes}% des transactions`,
       icon: faCheckCircle,
       color: "green"
     },
     {
       title: "Annulés",
       value: data.annules,
-      trend: `${data.evolutionAnnules}% ce mois`,
+      trend: `${data.evolutionAnnules}% des transactions`,
       icon: faBan,
       color: "gray"
     }

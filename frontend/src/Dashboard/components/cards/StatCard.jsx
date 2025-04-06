@@ -3,7 +3,7 @@ import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import './StatCard.css';
 
 const StatCard = ({ title, value, trend, icon, color }) => {
-  const isPositive = trend.includes('+');
+  const isPositive = trend.includes('%');
 
   return (
     <div className={`stat-card ${color}`}>

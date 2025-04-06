@@ -111,10 +111,10 @@ const Dashboard = () => {
       {/* Header Section */}
       <div className="dashboard-header">
         <h2>Today's Sales</h2>
-        <button className="export-btn">
+        {/* <button className="export-btn">
           <FontAwesomeIcon icon={faDownload} />
           Export
-        </button>
+        </button> */}
       </div>
 
       {/* Stats Cards */}
@@ -132,39 +132,7 @@ const Dashboard = () => {
       </div>
 
       {/* Charts Section */}
-      <div className="charts-grid">
-        {/* Visitor Insights */}
-        <div className="chart-card">
-          <div className="chart-header">
-            <h3>Visitor Insights</h3>
-          </div>
-          <CustomerChart data={visitorData} />
-        </div>
-
-        {/* Revenue Charts */}
-        <div className="chart-container">
-          <div className="chart-card">
-            <div className="chart-header">
-              <h3>Total Revenue</h3>
-            </div>
-            <SalesChart data={revenueData} />
-          </div>
-
-          <div className="chart-card">
-            <div className="chart-header">
-              <h3>Customer Satisfaction</h3>
-            </div>
-            <CustomerChart data={satisfactionData} />
-          </div>
-
-          <div className="chart-card">
-            <div className="chart-header">
-              <h3>Target vs Reality</h3>
-            </div>
-            <TargetChart />
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };

@@ -50,6 +50,7 @@ const ShopsList = () => {
   };
 
   const handleRentClick = (shopId) => {
+    console.log('shopId', shopId);
     const isAuthenticated = localStorage.getItem('access_token');
     
     if (!isAuthenticated) {

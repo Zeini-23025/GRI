@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import api from '../../api';
+import { apiServices } from '../../api';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './login.css';
@@ -15,21 +15,37 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await api.post('/api/login/', {
+      const response = await apiServices.auth.login({
         email,
         password,
       });
 
+      // Stocker toutes les informations de l'utilisateur
+      const userData = response.data;
+      localStorage.setItem('access_token', userData.access);
+      localStorage.setItem('refresh_token', userData.refresh);
+      localStorage.setItem('id', userData.id);
+      localStorage.setItem('username', userData.username);
+      localStorage.setItem('telephone', userData.telephone)
+      localStorage.setItem('email', userData.email);
+      localStorage.setItem('role', userData.role);
+      localStorage.setItem('is_superuser', userData.is_superuser);
+      localStorage.setItem('first_name', userData.first_name);
+      localStorage.setItem('last_name', userData.last_name);
 
-      // Stocker les informations de l'utilisateur et les tokens
-      localStorage.setItem('access_token', response.data.access);
-      localStorage.setItem('refresh_token', response.data.refresh);
-      localStorage.setItem('user_role', response.data.role);
-      localStorage.setItem('user_email', response.data.email);
-      localStorage.setItem('user_name', response.data.username);
+      // Log pour déboguer
+      console.log('Informations utilisateur stockées:', {
+        username: userData.username,
+        email: userData.email,
+        role: userData.role,
+        telephone: userData.telephone,
+        is_superuser: userData.is_superuser,
+        first_name: userData.first_name,
+        last_name: userData.last_name,
+      });
 
       // Rediriger en fonction du rôle
-      if (response.data.role === 'provider' || response.data.is_superuser) {
+      if (userData.role === 'provider' || userData.is_superuser) {
         navigate('/dashboard');
       } else {
         
@@ -37,8 +53,8 @@ const Login = () => {
       }
       
     } catch (err) {
-      setError('Email ou mot de passe incorrect');
-      console.error('Erreur de connexion:', err);
+      console.error('Erreur complète:', err.response);
+      setError(err.response?.data?.error || 'Email ou mot de passe incorrect');
     }
   };
 
@@ -83,7 +99,11 @@ const Login = () => {
                   required
                 />
               </div>
-              {error && <p className="text-danger text-center">{error}</p>}
+              {error && (
+                <div className="alert alert-danger text-center">
+                  {error}
+                </div>
+              )}
               <div className="d-grid">
                 <button type="submit" className="btn custom-signup-btn">
                   Se connecter

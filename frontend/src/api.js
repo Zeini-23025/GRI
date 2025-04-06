@@ -53,48 +53,49 @@ api.interceptors.response.use(
   }
 );
 
+
 const apiServices = {
   // Immobiliers
   immobiliers: {
     list: () => api.get('/api/immobiliers/'),
     get: (id) => api.get(`/api/immobiliers/${id}/`),
-    create: (data) => api.post('/api/immobiliers/create/', data),
-    update: (id, data) => api.put(`/api/immobiliers/${id}/update/`, data),
-    delete: (id) => api.delete(`/api/immobiliers/${id}/delete/`),
+    create: (data) => api.post('/api/immobiliers/', data),
+    update: (id, data) => api.put(`/api/immobiliers/${id}`, data),
+    delete: (id) => api.delete(`/api/immobiliers/${id}/`),
   },
 
   // Types
   types: {
     list: () => api.get('/api/types/'),
     get: (id) => api.get(`/api/types/${id}/`),
-    create: (data) => api.post('/api/types/create/', data),
-    update: (id, data) => api.put(`/api/types/${id}/update/`, data),
-    delete: (id) => api.delete(`/api/types/${id}/delete/`),
+    create: (data) => api.post('/api/types/', data),
+    update: (id, data) => api.put(`/api/types/${id}/`, data),
+    delete: (id) => api.delete(`/api/types/${id}/`),
   },
 
   // Contrats
   contrats: {
     list: () => api.get('/api/contrats/'),
     get: (id) => api.get(`/api/contrats/${id}/`),
-    create: (data) => api.post('/api/contrats/create/', data),
-    update: (id, data) => api.put(`/api/contrats/${id}/update/`, data),
-    delete: (id) => api.delete(`/api/contrats/${id}/delete/`),
+    create: (data) => api.post('/api/contrats/', data),
+    update: (id, data) => api.put(`/api/contrats/${id}/`, data),
+    delete: (id) => api.delete(`/api/contrats/${id}/`),
   },
 
   // Paiements
   paiements: {
     list: () => api.get('/api/paiements/'),
     get: (id) => api.get(`/api/paiements/${id}/`),
-    create: (data) => api.post('/api/paiements/create/', data),
-    update: (id, data) => api.put(`/api/paiements/${id}/update/`, data),
-    delete: (id) => api.delete(`/api/paiements/${id}/delete/`),
+    create: (data) => api.post('/api/paiements/', data),
+    update: (id, data) => api.put(`/api/paiements/${id}/`, data),
+    delete: (id) => api.delete(`/api/paiements/${id}/`),
   },
 
   // Utilisateurs
   utilisateurs: {
-    list: () => api.get('/api/utilisateurs/'),
-    get: (id) => api.get(`/api/utilisateurs/${id}/`),
-    update: (id, data) => api.put(`/api/user/update/`, data),
+    list: () => api.get('/api/users/'),
+    get: (id) => api.get(`/api/users/${id}/`),
+    update: (id, data) => api.put(`/api/user/${id}/`, data),
   },
 
   // Demandes
@@ -105,6 +106,40 @@ const apiServices = {
     get: (id) => api.get(`/api/demandes/${id}/`),
     accepter: (id) => api.put(`/api/demandes/${id}/accepter/`),
     refuser: (id) => api.put(`/api/demandes/${id}/refuser/`),
+  },
+
+  Notifications: {
+    list: () => api.get('/api/notifications/'),
+    create: (data) => api.post('/api/notifications/', data),
+    delete: (id) => api.delete(`/api/notifications/${id}/`, data),
+
+  },
+
+  // Auth services
+  auth: {
+    login: (credentials) => api.post('/api/login/', credentials),
+    verifyToken: () => api.post('/api/verify-token/'),
+    getCurrentUser: () => {
+      return {
+        username: localStorage.getItem('username'),
+        email: localStorage.getItem('email'),
+        role: localStorage.getItem('role'),
+        telephone: localStorage.getItem('telephone'),
+        is_superuser: localStorage.getItem('is_superuser') === 'true',
+        first_name: localStorage.getItem('first_name'),
+        last_name: localStorage.getItem('last_name'),
+      };
+    },
+    logout: () => {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      localStorage.removeItem('username');
+      localStorage.removeItem('email');
+      localStorage.removeItem('role');
+      localStorage.removeItem('is_superuser');
+      localStorage.removeItem('first_name');
+      localStorage.removeItem('last_name');
+    }
   },
 };
 

@@ -9,4 +9,6 @@ sqlparse
 psycopg2-binary
 python-dotenv
 pytest-django
-
+celery
+django-celery-beat
+redis

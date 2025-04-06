@@ -60,8 +60,7 @@ const HousesList = () => {
       });
       return;
     }
-
-    navigate(`/demandes/${houseId}`);
+    navigate(`/demandes/${3}`);
     window.scrollTo({
       top: 0,
       behavior: 'instant'

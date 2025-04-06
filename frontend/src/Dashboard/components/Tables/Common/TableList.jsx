@@ -18,7 +18,7 @@ const TableList = ({
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,9 +62,11 @@ const TableList = ({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <Link to={createPath} className="create-button">
-            Nouveau {title.slice(0, -1)}
-          </Link>
+          {(title !== "Paiements" && title !== "Contrats")  && (
+            <Link to={createPath} className="create-button">
+              Nouveau {title.slice(0, -1)}
+            </Link>
+          )}
         </div>
         <div className="table-wrapper">
           <table className="data-table">

@@ -4,12 +4,10 @@ import {
   faHome,
   faTableCells,
   faCog,
-  faSignOutAlt,
+  faChartArea,
   faSearch,
   faComments,
-  faFolder,
-  faShoppingCart,
-  faHeart,
+  faFileInvoiceDollar,
   faBars,
   faCode,
   faMoneyBillTransfer,
@@ -39,21 +37,21 @@ function Sidebar({ isOpen, setIsOpen }) {
       icon: faMoneyBillTransfer, 
       text: 'Transactions', 
       path: '/dashboard/transactions',
-      subItems: [
-        { text: 'Recent', path: '/dashboard/transactions' },
-        { text: 'History', path: '/dashboard/transactions/history' }
-      ]
+      // subItems: [
+      //   { text: 'Recent', path: '/dashboard/transactions' },
+      //   { text: 'History', path: '/dashboard/transactions/history' }
+      // ]
     },
     { icon: faCog, text: 'Demandes', path: '/dashboard/demandes' },
-    { icon: faCog, text: 'Revenue', path: '/dashboard/revenues' },
+    { icon: faFileInvoiceDollar, text: 'Revenue', path: '/dashboard/revenues' },
     { icon: faCog, text: 'Retad', path: '/dashboard/retard' },
-    { icon: faComments, text: 'Statistique', path: '/dashboard/statistique' },
+    { icon: faChartArea, text: 'Statistique', path: '/dashboard/statistique' },
     { 
       icon: faTableCells,
       text: 'Tables',
       path: '/dashboard/gestion-des-tables',
       subItems: [
-        { text: 'Immobiliers', path: '/dashboard/gestion-des-tables/immobilier' },
+        { text: 'Immobiliers', path: '/dashboard/gestion-des-tables/immobiliers' },
         { text: 'Types', path: '/dashboard/gestion-des-tables/types' },
         { text: 'Contrats', path: '/dashboard/gestion-des-tables/contrat' },
         { text: 'Paiements', path: '/dashboard/gestion-des-tables/paiement' },

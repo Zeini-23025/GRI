@@ -15,4 +15,9 @@ export default defineConfig({
   define: {
     global: 'window', // Ajout de cette ligne
   },
+  server: {
+    // host: true,  // Cela expose le serveur à votre réseau local
+    port: 5173,  // Vous pouvez spécifier un port si nécessaire
+  }
 })
+

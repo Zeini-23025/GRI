@@ -15,6 +15,7 @@ const ApartmentsList = () => {
         const response = await apiServices.immobiliers.list();
         // Filtrer pour n'obtenir que les appartements
         const apartmentsList = response.data.filter(item => item.type === 'Appartement');
+        console.log('response', apartmentsList);
         setApartments(apartmentsList);
       } catch (error) {
         console.error('Erreur lors du chargement des appartements:', error);
@@ -95,16 +96,16 @@ const ApartmentsList = () => {
               {expandedId === apartment.id && (
                 <div className="expanded-content">
                   <p className="location">
-                    <i className="fa fa-map-marker"></i> {apartment.localisation}
+                    <i className="fa fa-map-marker"></i> {apartment.adresse}
                   </p>
 
                   <div className="basic-info">
                     <div className="property-details">
                       <span><i className="fa fa-bed"></i> {apartment.chambres} chambres</span>
                       <span><i className="fa fa-bath"></i> {apartment.salles_bain} SDB</span>
-                      <span><i className="fa fa-square"></i> {apartment.surface} m²</span>
+                      <span><i className="fa fa-square"></i> {apartment.superficie} m²</span>
                     </div>
-                    <p className="price">{apartment.prix} MRU/mois</p>
+                    <p className="price">{apartment.montant} MRU/mois</p>
                   </div>
 
                   <div className="expanded-info">

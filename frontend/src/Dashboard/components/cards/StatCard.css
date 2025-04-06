@@ -1,10 +1,14 @@
 .stat-card {
+  width: 240px;
+  /* min-width: 200px; */
+
   background: white;
   border-radius: 1rem;
   padding: 1.5rem;
   display: flex;
   gap: 1rem;
   transition: all 0.3s ease;
+  margin-top: 15px;
 }
 
 .stat-card:hover {
