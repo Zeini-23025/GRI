@@ -152,7 +152,7 @@ Accessible via [http://localhost:3000](http://localhost:3000)
 ## 📁 Structure du projet
 
 ```
-revenus-app/
+GRI/
 ├── .github/              # Workflows CI/CD
 ├── backend/              # Django API
 │   ├── Dockerfile

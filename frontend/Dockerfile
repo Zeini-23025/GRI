@@ -1,19 +1,12 @@
-# Étape 1 : Build de l'application React
-FROM node:18 AS build
+FROM node:20
 
 WORKDIR /app
 
-# Copier uniquement les fichiers de dépendances pour optimiser le cache
-COPY package.json package-lock.json ./
-
-# Supprimer les anciennes installations pour éviter les bugs
-RUN rm -rf node_modules package-lock.json && npm cache clean --force
-
-# Réinstaller proprement les dépendances
+COPY package*.json ./
 RUN npm install
 
-# Copier le reste du projet
 COPY . .
 
-# Construire l'application React
-RUN npm run build
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]

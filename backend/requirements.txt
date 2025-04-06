@@ -9,4 +9,4 @@ sqlparse
 psycopg2-binary
 python-dotenv
 pytest-django
-
+gunicorn

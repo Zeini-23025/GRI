@@ -17,4 +17,5 @@ COPY . .
 EXPOSE 8000
 
 # Commande pour exécuter le serveur Gunicorn avec Django
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "gri.wsgi:application"]
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "backend.wsgi:application"]
+

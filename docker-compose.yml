@@ -7,24 +7,17 @@ services:
       - "8000:8000"
     environment:
       - DEBUG=False
-    depends_on:
-      - db
+    volumes:
+      - ./backend:/app  # Mount the entire backend folder
+    command: python manage.py runserver 0.0.0.0:8000  # Run the Django backend
 
   frontend:
     build: ./frontend
     ports:
-      - "3000:80"
-    depends_on:
-      - backend
-
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: gri_db
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      - "3000:3000"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./frontend:/app
+    command: npm run dev  # Run the frontend with Vite
 
 volumes:
-  postgres_data:
+  sqlite_data:
