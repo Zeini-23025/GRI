@@ -140,172 +140,127 @@
 // export default Dashboard;
 
 
-import React, { useState, useEffect } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faMoneyBillWave, 
-  faClock,
-  faFileInvoiceDollar,
-  faUserCheck
+  faHotel,
+  faStar,
+  faSearch,
+  faMapMarkerAlt,
+  faCalendarAlt,
+  faMoneyBillWave
 } from '@fortawesome/free-solid-svg-icons';
-import StatCard from '../components/cards/StatCard';
-import RevenueChart from '../components/Charts/RevenueChart';
-import { apiServices } from '../../api';
 import './Dashboard.css';
 
 const Dashboard = () => {
-  const [stats, setStats] = useState({
-    totalRevenue: 0,
-    pendingPayments: 0,
-    activeContracts: 0,
-    collectionRate: 0
-  });
-  const [monthlyData, setMonthlyData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      try {
-        setLoading(true);
-        
-        // Récupération des données en parallèle
-        const [contratsRes, paiementsRes] = await Promise.all([
-          apiServices.contrats.list(),
-          apiServices.paiements.list()
-        ]);
-
-        const contrats = contratsRes.data;
-        const paiements = paiementsRes.data;
-
-        // Calcul des statistiques principales
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();
-
-        // 1. Revenu total (somme de tous les paiements)
-        const totalRevenue = paiements.reduce((sum, p) => sum + p.montant, 0);
-
-        // 2. Paiements en retard (contrats actifs sans paiement ce mois-ci)
-        const activeContracts = contrats.filter(c => {
-          const dateFin = new Date(c.date_fin);
-          return dateFin >= currentDate;
-        }).length;
-
-        // 3. Taux de recouvrement (paiements ce mois / montant attendu)
-        const expectedRevenue = contrats.reduce((sum, c) => {
-          const dateDebut = new Date(c.date_debut);
-          const dateFin = new Date(c.date_fin);
-          return (dateDebut <= currentDate && dateFin >= currentDate) ? sum + c.montant : sum;
-        }, 0);
-
-        const monthlyPayments = paiements
-          .filter(p => {
-            const paymentDate = new Date(p.date_paiement);
-            return paymentDate.getMonth() === currentMonth && 
-                   paymentDate.getFullYear() === currentYear;
-          })
-          .reduce((sum, p) => sum + p.montant, 0);
-
-        const collectionRate = expectedRevenue > 0 
-          ? Math.round((monthlyPayments / expectedRevenue) * 100) 
-          : 0;
-
-        // 4. Préparation des données mensuelles pour le graphique
-        const monthlyRevenue = Array(12).fill(0);
-        paiements.forEach(p => {
-          const paymentDate = new Date(p.date_paiement);
-          if (paymentDate.getFullYear() === currentYear) {
-            const month = paymentDate.getMonth();
-            monthlyRevenue[month] += p.montant;
-          }
-        });
-
-        setStats({
-          totalRevenue,
-          pendingPayments: expectedRevenue - monthlyPayments,
-          activeContracts,
-          collectionRate
-        });
-
-        setMonthlyData(monthlyRevenue);
-        setLoading(false);
-      } catch (err) {
-        console.error("Erreur lors du chargement des données:", err);
-        setError("Erreur lors du chargement du tableau de bord");
-        setLoading(false);
-      }
-    };
-
-    fetchDashboardData();
-  }, []);
-
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('fr-FR', {
-      style: 'currency',
-      currency: 'MRU',
-      minimumFractionDigits: 0
-    }).format(amount);
-  };
-
-  if (loading) return <div className="loading">Chargement en cours...</div>;
-  if (error) return <div className="error">{error}</div>;
+  // Données pour les hôtels
+  const hotelsData = [
+    {
+      name: "Shikara Hotel",
+      location: "Alamah, Yogyatama",
+      price: "$42.72 / night",
+      popular: true
+    },
+    {
+      name: "Lepsen Hotel",
+      location: "Yogyatama",
+      price: "$38 / night",
+      popular: false
+    },
+    {
+      name: "Shop Hotel",
+      location: "Big House, Shikara",
+      price: "$45 / night",
+      popular: false
+    }
+  ];
 
   return (
-    <div className="dashboard-container">
-      <h1 className="dashboard-title">Tableau de Bord</h1>
-      
-      {/* Cartes de Statistiques */}
-      <div className="stats-grid">
-        <StatCard
-          icon={faMoneyBillWave}
-          title="Revenu Total"
-          value={formatCurrency(stats.totalRevenue)}
-          trend={`${stats.collectionRate}% taux de recouvrement`}
-          color="green"
-        />
-        
-        <StatCard
-          icon={faClock}
-          title="Paiements en Retard"
-          value={formatCurrency(stats.pendingPayments)}
-          trend={`${stats.activeContracts} contrats actifs`}
-          color="orange"
-        />
-        
-        <StatCard
-          icon={faFileInvoiceDollar}
-          title="Contrats Actifs"
-          value={stats.activeContracts}
-          trend="Ce mois-ci"
-          color="blue"
-        />
-        
-        <StatCard
-          icon={faUserCheck}
-          title="Taux de Recouvrement"
-          value={`${stats.collectionRate}%`}
-          trend="Performance mensuelle"
-          color="purple"
-        />
+    <div className="hotel-dashboard">
+      {/* Header Section */}
+      <div className="dashboard-header">
+        <h1>Find hotel to stay</h1>
       </div>
 
-      {/* Graphique des Revenus */}
-      <div className="chart-container">
-        <RevenueChart 
-          title="Revenus Mensuels"
-          data={{
-            labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
-            datasets: [{
-              label: 'Revenus',
-              data: monthlyData,
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-              borderColor: 'rgba(54, 162, 235, 1)',
-              borderWidth: 2,
-              tension: 0.4
-            }]
-          }} 
-        />
+      {/* Search Filters */}
+      <div className="search-filters">
+        <div className="filter-item">
+          <FontAwesomeIcon icon={faCalendarAlt} />
+          <span>2022 - 24:14</span>
+        </div>
+        <div className="filter-item">
+          <FontAwesomeIcon icon={faMapMarkerAlt} />
+          <span>Yogyatama, Ind...</span>
+        </div>
+        <div className="filter-item">
+          <FontAwesomeIcon icon={faSearch} />
+          <span>View All</span>
+        </div>
+      </div>
+
+      {/* Categories */}
+      <div className="categories">
+        <div className="category active">Lodging available</div>
+        <div className="category">Most Popular</div>
+        <div className="category">Where to</div>
+      </div>
+
+      {/* Popular Section */}
+      <div className="popular-section">
+        <h3>Most Popular</h3>
+        <div className="popular-tags">
+          <span className="tag">Special Offers</span>
+          <span className="tag">New Me</span>
+        </div>
+      </div>
+
+      {/* Hotels List */}
+      <div className="hotels-list">
+        {hotelsData.map((hotel, index) => (
+          <div key={index} className="hotel-card">
+            <div className="hotel-info">
+              <h3>{hotel.name}</h3>
+              <div className="location">
+                <FontAwesomeIcon icon={faMapMarkerAlt} />
+                <span>{hotel.location}</span>
+              </div>
+              <div className="price">
+                <FontAwesomeIcon icon={faMoneyBillWave} />
+                <span>{hotel.price}</span>
+              </div>
+            </div>
+            {hotel.popular && (
+              <div className="popular-badge">
+                <FontAwesomeIcon icon={faStar} />
+                <span>Popular</span>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Hotel Details */}
+      <div className="hotel-details">
+        <h2>Shikara Hotel</h2>
+        <div className="detail-tabs">
+          <div className="tab active">Overview</div>
+          <div className="tab">Facilities</div>
+          <div className="tab">Details</div>
+          <div className="tab">Reviews</div>
+        </div>
+        <div className="description">
+          Shikara Hotel is committed to waste our guests' dreams. We achieve this by making business travel easier and leisure travel more accessible. Read more.
+        </div>
+        <div className="location-actions">
+          <button className="action-btn">
+            <FontAwesomeIcon icon={faMapMarkerAlt} />
+            <span>Location</span>
+          </button>
+          <button className="action-btn">
+            <FontAwesomeIcon icon={faCalendarAlt} />
+            <span>Book Now</span>
+          </button>
+        </div>
       </div>
     </div>
   );
