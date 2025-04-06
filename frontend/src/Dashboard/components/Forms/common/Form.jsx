@@ -31,19 +31,37 @@ const Form = ({ fields, actions, endpoint, id, title }) => {
     }
   }, [id, fields, endpoint]);
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
-      if (id) {
-        await apiServices[endpoint].update(id, formData);
-      } else {
-        await apiServices[endpoint].create(formData);
+      const formDataToSend = new FormData();
+
+      // Ajoutez les champs au FormData
+      Object.keys(formData).forEach((key) => {
+        formDataToSend.append(key, formData[key]);
+      });
+
+      // Si un fichier est sélectionné, ajoutez-le au FormData
+      if (formData.image instanceof File) {
+        formDataToSend.append('image', formData.image);
       }
+
+      // Envoyer les données au backend
+      if (id) {
+        await apiServices[endpoint].update(id, formDataToSend);
+      } else {
+        await apiServices[endpoint].create(formDataToSend);
+      }
+
       navigate(`/dashboard/gestion-des-tables/${endpoint}`);
     } catch (err) {
-      setError('Erreur lors de l\'enregistrement');
+      setError("Erreur lors de l'enregistrement de l'immobilier");
+      console.error("Erreur lors de l'envoi :", err.response?.data);
     }
+
     setLoading(false);
   };
 

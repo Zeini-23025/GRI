@@ -406,7 +406,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Utilisateurs, Immobiliers, Types, Contrats, Paiements, Demandes, Notifications
 from .serializers import UserSerializer, ImmobiliersSerializer, TypesSerializer, ContratsSerializer, PaiementsSerializer, DemandesSerializer, NotificationsSerializer
 from django.contrib.auth.models import User
-# from .tasks import verifier_paiements_retard
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -425,8 +424,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @decorators.action(detail=False, methods=['post'], url_path='login')
     def login(self, request):
-        # verifier_paiements_retard()
-        # print("fait")
         email = request.data.get('email')
         password = request.data.get('password')
         try:

@@ -26,17 +26,17 @@ export const featured = [
     {
       cover: "../images/hero/h2.png",
       name: "Maison & Villa",
-      total: "155 Property",
+      total: "18 Property",
     },
     {
       cover: "../images/hero/h3.png",
       name: "Apartements",
-      total: "300 Property",
+      total: "9 Property",
     },
     {
       cover: "../images/hero/boutique.png",
       name: "Boutiques",
-      total: "80 Property",
+      total: "5 Property",
     },
 ]
 

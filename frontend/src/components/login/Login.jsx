@@ -48,6 +48,7 @@ const Login = () => {
       if (userData.role === 'provider' || userData.is_superuser) {
         navigate('/dashboard');
       } else {
+        
         navigate('/');
       }
       

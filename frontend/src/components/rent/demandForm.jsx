@@ -131,6 +131,15 @@ const DemandForm = ({ immobilierId }) => {
         }));
     };
 
+
+    const handleBackClick = () => {
+        navigate('/services');
+        window.scrollTo({
+          top: 0,
+          behavior: 'instant'
+        });
+      };
+      
     const handleSubmit = async (e) => {
         e.preventDefault();
         
@@ -209,7 +218,9 @@ const DemandForm = ({ immobilierId }) => {
         <div className="demand-form-container">
             <h2>Formulaire de demande de location</h2>
             {error && <div className="error-message">{renderError(error)}</div>}
-            
+            <div className="back-button" onClick={handleBackClick}>
+        <img src="/images/back.png" alt="Retour" title="Retour aux catégories" />
+      </div>
             <form onSubmit={handleSubmit} className="form">
                 <div className="inputs-container">
                     {fields.map((field) => (

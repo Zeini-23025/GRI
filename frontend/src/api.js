@@ -36,13 +36,15 @@ api.interceptors.response.use(
             { refresh: refreshToken }
           );
           // Enregistrer le nouveau token d'accès
-          localStorage.setItem(ACCESS_TOKEN, refreshResponse.data.access);
+          localStorage.setItem('access_token', response.data.access); // → localStorage.setItem(ACCESS_TOKEN, ...);
+          localStorage.setItem('refresh_token', response.data.refresh); // → localStorage.setItem(REFRESH_TOKEN, ...);
           // Relancer la requête d'origine avec le nouveau token
           return api(error.config);
         } catch (err) {
           // Si le rafraîchissement échoue, supprimer les tokens et rediriger l'utilisateur
           localStorage.removeItem(ACCESS_TOKEN);
-          localStorage.removeItem(REFRESH_TOKEN);
+          localStorage.removeItem(REFRESH_TOKEN); 
+          
           // Vous pouvez ajouter ici la logique pour rediriger l'utilisateur vers la page de login
         }
       }

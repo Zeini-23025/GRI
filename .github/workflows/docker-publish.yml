@@ -9,7 +9,7 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
-    steps:
+    steps:      
       # Vérifiez le dépôt
       - name: Checkout code
         uses: actions/checkout@v3
